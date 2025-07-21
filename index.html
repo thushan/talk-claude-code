@@ -40,32 +40,93 @@
 		}
 		
 		.author-header {
-			background: #2a2a2a;
+			background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
 			border: 1px solid #444;
-			border-radius: 6px;
-			padding: 0px 20px;
+			border-radius: 12px;
+			padding: 20px 30px;
 			margin: 20px auto 60px;
 			max-width: fit-content;
-			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 			display: inline-block;
+			position: relative;
+			overflow: hidden;
 		}
 		
+		.author-header::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 2px;
+			background: linear-gradient(90deg, transparent, #CF7D5B, transparent);
+			opacity: 0.5;
+		}
+		
+		.author-header-content {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+		}
+		
+		.author-info {
+			text-align: left;
+		}
+		
+		.author-header-title {
+			color: #e0e0e0;
+			font-size: 18px;
+			font-family: var(--font-family-base);
+			margin: 0 0 8px 0;
+			font-weight: 500;
+			letter-spacing: 0.5px;
+		}
 		
 		.author-header-github {
-			color: #d4d4d4;
-			font-size: 16px;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			color: #a0a0a0;
+			font-size: 14px;
 			font-family: var(--font-family-mono);
 			margin: 0;
-			font-weight: 300;
-			letter-spacing: 0.5px;
+			font-weight: 400;
 		}
-		.author-header-title {
-			color: #d4d4d4;
-			font-size: 16px;
-			font-family: var(--font-family-mono);
-			margin: 0;
-			font-weight: 300;
-			letter-spacing: 0.5px;
+		
+		.author-header-github a {
+			color: var(--text-accent);
+			text-decoration: none;
+			transition: color var(--transition-fast);
+		}
+		
+		.author-header-github a:hover {
+			color: var(--text-highlight);
+			text-decoration: underline;
+		}
+		
+		.github-icon {
+			width: 20px;
+			height: 20px;
+			fill: #a0a0a0;
+			transition: fill var(--transition-fast);
+		}
+		
+		.author-header-github:hover .github-icon {
+			fill: var(--text-accent);
+		}
+		
+		.author-avatar {
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+			border: 2px solid #444;
+			background: #1a1a1a;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 24px;
+			color: var(--text-accent);
+			font-weight: 600;
 		}
 		.reveal .title-slide img {
 			max-width: 500px;
@@ -91,8 +152,18 @@
 				<br />
 				<br />
 				<div class="author-header">
-					<p class="author-header-title"><strong>Thushan Fernando</strong></p>
-					<p class="author-header-github"><a href="https://github.com/thushan/talk-claude-code">@github/thushan/talk-claude-code</a></p>
+					<div class="author-header-content">
+						<div class="author-avatar">TF</div>
+						<div class="author-info">
+							<p class="author-header-title">Thushan Fernando</p>
+							<p class="author-header-github">
+								<svg class="github-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+								</svg>
+								<a href="https://github.com/thushan/talk-claude-code">thushan/talk-claude-code</a>
+							</p>
+						</div>
+					</div>
 				</div>
 			</section>
 
@@ -171,16 +242,18 @@
 				<h3>VSCode Integration</h3>
 				<div class="vscode-terminal">
 					<div class="vscode-tabs">
-						<div class="vscode-tab active">Terminal</div>
-						<div class="vscode-tab">Output</div>
-						<div class="vscode-tab">Debug Console</div>
+						<div class="vscode-tab active" data-tab="terminal">Terminal</div>
+						<div class="vscode-tab" data-tab="output">Output</div>
+						<div class="vscode-tab" data-tab="debug">Debug Console</div>
 					</div>
 					<div class="vscode-terminal-content">
-						<div class="terminal-block">
-							<span class="prompt">PS</span> <span class="path">D:\projects\myapp></span> <span class="command">claude --help</span>
-						</div>
-						<div class="terminal-block">
-							<span class="cmd-output">Usage: claude [options] [command]
+						<!-- Terminal Tab Content -->
+						<div class="tab-content" id="terminal-content" style="display: block;">
+							<div class="terminal-block">
+								<span class="prompt">PS</span> <span class="path">D:\projects\myapp></span> <span class="command">claude --help</span>
+							</div>
+							<div class="terminal-block">
+								<span class="cmd-output">Usage: claude [options] [command]
 
 Commands:
   init       Initialize Claude in current directory
@@ -191,6 +264,27 @@ Commands:
 Options:
   -h, --help     Show help
   -v, --version  Show version number</span>
+							</div>
+						</div>
+						<!-- Output Tab Content -->
+						<div class="tab-content" id="output-content" style="display: none;">
+							<div class="terminal-block">
+								<span class="cmd-output">[Claude Code] Initializing...
+[Claude Code] Connected to language server
+[Claude Code] Ready - v1.0.0
+[Claude Code] Workspace: D:\projects\myapp
+[Claude Code] Active extensions: Python, JavaScript, TypeScript</span>
+							</div>
+						</div>
+						<!-- Debug Console Tab Content -->
+						<div class="tab-content" id="debug-content" style="display: none;">
+							<div class="terminal-block">
+								<span class="cmd-output" style="color: #ce9178;">Debug: Claude Code extension activated
+Debug: Loading user preferences...
+Debug: Context window: 200k tokens
+Debug: Model: claude-3-opus-20240229
+Debug: Temperature: 0.2</span>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -197,19 +197,62 @@
 }
 
 /* Copy animation */
-@keyframes rainbow-border {
-    0% { border-color: #ff0080; }
-    16% { border-color: #ff8000; }
-    33% { border-color: #ffff00; }
-    50% { border-color: #00ff00; }
-    66% { border-color: #00ffff; }
-    83% { border-color: #0080ff; }
-    100% { border-color: #ff0080; }
+@keyframes rainbow-flow {
+    0% {
+        background-position: -50% 50%;
+    }
+    100% {
+        background-position: 150% 50%;
+    }
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(138, 43, 226, 0);
+    }
+    50% {
+        box-shadow: 0 0 30px 10px rgba(138, 43, 226, 0.3),
+                    0 0 60px 20px rgba(88, 166, 255, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(138, 43, 226, 0);
+    }
 }
 
 .terminal-block.copying {
-    animation: rainbow-border 0.8s ease-in-out;
-    border-width: 2px;
+    position: relative;
+    overflow: hidden;
+    animation: pulse-glow 0.6s ease-out;
+    transform: scale(1.005);
+    transition: transform 0.2s ease-out;
+}
+
+.terminal-block.copying::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    padding: 2px;
+    background: linear-gradient(
+        90deg,
+        #ff0080,
+        #ff0040,
+        #ff0080,
+        #ff00ff,
+        #8000ff,
+        #0080ff,
+        #00ffff,
+        #00ff80,
+        #80ff00,
+        #ffff00,
+        #ff8000,
+        #ff0080
+    );
+    background-size: 200% 100%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rainbow-flow 0.8s linear;
 }
 
 /* Legacy console support */
@@ -331,14 +374,15 @@
 
 .code-label {
     position: absolute;
-    top: -12px;
+    top: -20px;
     left: 20px;
-    padding: 2px 12px;
+    padding: 4px 16px;
     border-radius: 4px;
-    font-size: 0.7em;
+    font-size: 0.75em;
     font-weight: 600;
     z-index: 1;
     background: var(--bg-primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .code-before .code-label {
@@ -354,7 +398,7 @@
 .code-before pre,
 .code-after pre {
     margin: 0;
-    padding: 20px;
+    padding: 30px 20px 20px 20px;
     background: transparent;
     box-shadow: none;
     max-height: none;

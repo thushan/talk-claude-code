@@ -108,7 +108,7 @@ function initVSCodeTabs() {
     
     tabContainers.forEach(container => {
         const tabs = container.querySelectorAll('.vscode-tab');
-        const terminal = container.parentElement.querySelector('.vscode-terminal-content');
+        const terminalContent = container.parentElement.querySelector('.vscode-terminal-content');
         
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
@@ -117,9 +117,17 @@ function initVSCodeTabs() {
                 // Add active class to clicked tab
                 tab.classList.add('active');
                 
-                // You can add custom content switching logic here
-                if (terminal && tab.dataset.content) {
-                    terminal.innerHTML = tab.dataset.content;
+                // Hide all tab contents
+                const allContents = terminalContent.querySelectorAll('.tab-content');
+                allContents.forEach(content => {
+                    content.style.display = 'none';
+                });
+                
+                // Show the selected tab content
+                const tabType = tab.dataset.tab;
+                const selectedContent = terminalContent.querySelector(`#${tabType}-content`);
+                if (selectedContent) {
+                    selectedContent.style.display = 'block';
                 }
             });
         });
