@@ -7,8 +7,8 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-	<meta name="description" content="Claude Control - AI-Powered Development">
-	<meta name="author" content="Your Name">
+	<meta name="description" content="Claude Control - Using Claude AI for efficient software development.">
+	<meta name="author" content="Thushan Fernando">
 
 	<title>Claude Control (2025)</title>
 
@@ -17,20 +17,83 @@
 	<link rel="stylesheet" href="engine/theme/modern-dark.css" id="theme">
 	<link rel="stylesheet" href="engine/modern.css">
 	<link rel="stylesheet" href="engine/plugin/highlight/claude-dark.css" id="highlight-theme">
+	<style>
+		/* Claude Code terminal header style */
+		.claude-header {
+			background: #2a2a2a;
+			border: 2px solid #CF7D5B;
+			border-radius: 6px;
+			padding: 0px 20px;
+			margin: 20px auto 60px;
+			max-width: fit-content;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+			display: inline-block;
+		}
+		
+		.claude-header-title {
+			color: #d4d4d4;
+			font-size: 16px;
+			font-family: var(--font-family-mono);
+			margin: 0;
+			font-weight: 300;
+			letter-spacing: 0.5px;
+		}
+		
+		.author-header {
+			background: #2a2a2a;
+			border: 1px solid #444;
+			border-radius: 6px;
+			padding: 0px 20px;
+			margin: 20px auto 60px;
+			max-width: fit-content;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+			display: inline-block;
+		}
+		
+		
+		.author-header-github {
+			color: #d4d4d4;
+			font-size: 16px;
+			font-family: var(--font-family-mono);
+			margin: 0;
+			font-weight: 300;
+			letter-spacing: 0.5px;
+		}
+		.author-header-title {
+			color: #d4d4d4;
+			font-size: 16px;
+			font-family: var(--font-family-mono);
+			margin: 0;
+			font-weight: 300;
+			letter-spacing: 0.5px;
+		}
+		.reveal .title-slide img {
+			max-width: 500px;
+			margin: 0 auto;
+			display: block;
+		}
+		
+		.reveal .title-slide {
+			text-align: center;
+			padding-top: 50px;
+		}
+	</style>
 </head>
 <body>
 	<div class="reveal">
 		<div class="slides">
 			<!-- Title Slide -->
-			<section data-markdown>
-				## Claude Control
-				### AI-Powered Development Workflow
-				
-				Your Name
-				
-				[@yourhandle](https://twitter.com/yourhandle)
-				
-				[github.com/yourusername](https://github.com/yourusername)
+			<section class="title-slide">
+				<img src="assets/img/claude-code.png" alt="Claude Code Header" class="boring center">
+				<div class="claude-header">
+					<p class="claude-header-title">✨ Using <strong>Claude Code</strong> in July 2025</p>
+				</div>
+				<br />
+				<br />
+				<div class="author-header">
+					<p class="author-header-title"><strong>Thushan Fernando</strong></p>
+					<p class="author-header-github"><a href="https://github.com/thushan/talk-claude-code">@github/thushan/talk-claude-code</a></p>
+				</div>
 			</section>
 
 			<!-- Introduction -->
