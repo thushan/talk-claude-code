@@ -7,82 +7,366 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-	<meta name="description" content="">
-	<meta name="author" content="Thushan Fernando">
+	<meta name="description" content="Claude Control - AI-Powered Development">
+	<meta name="author" content="Your Name">
 
-	<title>Fancy Title (2024)</title>
+	<title>Claude Control (2025)</title>
 
 	<link rel="stylesheet" href="engine/reset.css">
 	<link rel="stylesheet" href="engine/reveal.css">
-	<link rel="stylesheet" href="engine/thushan.css">
-	<link rel="stylesheet" href="engine/theme/black.css" id="theme">
-	<link rel="stylesheet" href="engine/plugin/highlight/monokai.css" id="highlight-theme">
+	<link rel="stylesheet" href="engine/theme/modern-dark.css" id="theme">
+	<link rel="stylesheet" href="engine/modern.css">
+	<link rel="stylesheet" href="engine/plugin/highlight/claude-dark.css" id="highlight-theme">
 </head>
 <body>
 	<div class="reveal">
 		<div class="slides">
+			<!-- Title Slide -->
 			<section data-markdown>
-				## Fancy title
-				## Is fancy
-				Thushan Fernando
-
-				![Splash Image](assets/img/memes/chris-pratt-omg.gif)
-
-				[@thushanfernando](https://twitter.com/thushanfernando)
-
-				[github.com/thushan](https://github.com/thushan)
+				## Claude Control
+				### AI-Powered Development Workflow
+				
+				Your Name
+				
+				[@yourhandle](https://twitter.com/yourhandle)
+				
+				[github.com/yourusername](https://github.com/yourusername)
 			</section>
 
+			<!-- Introduction -->
 			<section>
-				<h3>Flowchart</h3>
-				<div class="mermaid">
-				  <pre>
-					%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
-					flowchart TD
-					  A[Start] --> B{Is it?};
-					  B -- Yes --> C[OK];
-					  C --> D[Rethink];
-					  D --> B;
-					  B -- No ----> E[End];
-				  </pre>
+				<h2>What is Claude Control?</h2>
+				<ul class="idea">
+					<li>AI pair programming assistant</li>
+					<li>Integrated development environment</li>
+					<li>Natural language to code</li>
+					<li>Context-aware suggestions</li>
+				</ul>
+			</section>
+
+			<!-- Demo: Terminal Command -->
+			<section>
+				<h3>Simple Terminal Demo</h3>
+				<div class="terminal-window">
+					<div class="terminal-header">
+						<span class="terminal-button close"></span>
+						<span class="terminal-button minimize"></span>
+						<span class="terminal-button maximize"></span>
+						<span class="terminal-title">Terminal - bash</span>
+					</div>
+					<div class="terminal-content">
+						<div class="terminal-block">
+							<span class="cmd-prompt">$</span> <span class="cmd-command">claude "create a Python hello world"</span>
+							<span class="cmd-output">Creating hello_world.py...</span>
+							<span class="cmd-output">✓ File created successfully</span>
+						</div>
+					</div>
 				</div>
-			  </section>
+			</section>
+
+			<!-- Claude Interaction -->
+			<section>
+				<h3>Claude Conversation</h3>
+				<div class="claude-prompt">
+					Help me refactor this function to be more efficient
+				</div>
+				<div class="claude-response fragment">
+					I'll help you refactor the function. Here's an improved version that reduces complexity from O(n²) to O(n) using a hash map approach...
+				</div>
+			</section>
+
+			<!-- Code Comparison -->
+			<section>
+				<h3>Before & After</h3>
+				<div class="code-compare">
+					<div class="code-before">
+						<span class="code-label">Before</span>
+						<pre><code class="language-python">def find_duplicates(arr):
+    duplicates = []
+    for i in range(len(arr)):
+        for j in range(i+1, len(arr)):
+            if arr[i] == arr[j]:
+                duplicates.append(arr[i])
+    return duplicates</code></pre>
+					</div>
+					<div class="code-after">
+						<span class="code-label">After</span>
+						<pre><code class="language-python">def find_duplicates(arr):
+    seen = set()
+    duplicates = set()
+    for item in arr:
+        if item in seen:
+            duplicates.add(item)
+        seen.add(item)
+    return list(duplicates)</code></pre>
+					</div>
+				</div>
+			</section>
+
+			<!-- VSCode Terminal -->
+			<section>
+				<h3>VSCode Integration</h3>
+				<div class="vscode-terminal">
+					<div class="vscode-tabs">
+						<div class="vscode-tab active">Terminal</div>
+						<div class="vscode-tab">Output</div>
+						<div class="vscode-tab">Debug Console</div>
+					</div>
+					<div class="vscode-terminal-content">
+						<div class="terminal-block">
+							<span class="prompt">PS</span> <span class="path">D:\projects\myapp></span> <span class="command">claude --help</span>
+						</div>
+						<div class="terminal-block">
+							<span class="cmd-output">Usage: claude [options] [command]
+
+Commands:
+  init       Initialize Claude in current directory
+  chat       Start interactive chat session
+  generate   Generate code from prompt
+  review     Review code for improvements
+
+Options:
+  -h, --help     Show help
+  -v, --version  Show version number</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Features Grid -->
+			<section>
+				<h3>Key Features</h3>
+				<div class="feature-grid">
+					<div class="feature-card">
+						<h4><span class="rocket"></span>Fast Generation</h4>
+						<p>Generate boilerplate code, tests, and documentation in seconds</p>
+					</div>
+					<div class="feature-card">
+						<h4><span class="fire"></span>Smart Refactoring</h4>
+						<p>Improve code quality with AI-powered suggestions</p>
+					</div>
+					<div class="feature-card">
+						<h4><span class="star"></span>Context Aware</h4>
+						<p>Understands your project structure and coding patterns</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Live Demo Section -->
+			<section data-background-color="#161b22">
+				<h2>Live Demo Time!</h2>
+				<p class="fragment">Let's build something together...</p>
+			</section>
+
+			<!-- Command Examples -->
+			<section>
+				<h3>Common Commands</h3>
+				<div class="terminal-window">
+					<div class="terminal-header">
+						<span class="terminal-button close"></span>
+						<span class="terminal-button minimize"></span>
+						<span class="terminal-button maximize"></span>
+						<span class="terminal-title">Terminal - bash</span>
+					</div>
+					<div class="terminal-content">
+						<div class="terminal-block">
+							<span class="cmd-prompt">$</span> <span class="cmd-command">claude "create a user registration endpoint"</span>
+							<span class="cmd-output"># Generate a REST API endpoint</span>
+						</div>
+						<div class="terminal-block">
+							<span class="cmd-prompt">$</span> <span class="cmd-command">claude "add try-catch error handling to this function"</span>
+							<span class="cmd-output"># Add error handling</span>
+						</div>
+						<div class="terminal-block">
+							<span class="cmd-prompt">$</span> <span class="cmd-command">claude "write unit tests for the UserService class"</span>
+							<span class="cmd-output"># Write unit tests</span>
+						</div>
+						<div class="terminal-block">
+							<span class="cmd-prompt">$</span> <span class="cmd-command">claude "explain what this regex does: ^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"</span>
+							<span class="cmd-output"># Explain code</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Best Practices -->
+			<section>
+				<h3>Best Practices</h3>
+				<ul class="checklist">
+					<li>Be specific in your prompts</li>
+					<li>Review generated code before committing</li>
+					<li>Use Claude for learning, not just generation</li>
+					<li>Maintain consistent coding standards</li>
+					<li>Keep security in mind</li>
+				</ul>
+			</section>
+
+			<!-- Workflow Diagram -->
+			<section>
+				<h3>Development Workflow</h3>
+				<div class="mermaid">
+					<pre>
+%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
+flowchart LR
+    A[Write<br/>Prompt] --> B{Claude<br/>Processes}
+    B --> C[Generate<br/>Code]
+    C --> D[Review<br/>Output]
+    D --> E{Satisfied?}
+    E -->|No| F[Refine]
+    F --> B
+    E -->|Yes| G[Implement]
+    G --> H[Test]
+    H --> I[Deploy]
+					</pre>
+				</div>
+			</section>
+
+			<!-- Tips & Tricks -->
+			<section>
+				<h3>Pro Tips</h3>
+				<div class="terminal-window">
+					<div class="terminal-header">
+						<span class="terminal-button close"></span>
+						<span class="terminal-button minimize"></span>
+						<span class="terminal-button maximize"></span>
+						<span class="terminal-title">Terminal - bash</span>
+					</div>
+					<div class="terminal-content">
+						<div class="terminal-block">
+							<span class="cmd-prompt">$</span> <span class="cmd-command">claude --context ./src "refactor this module"</span>
+							<span class="cmd-output"># Use context files for better understanding</span>
+						</div>
+						<div class="terminal-block">
+							<span class="cmd-prompt">$</span> <span class="cmd-command">claude chat --save-to conversation.md</span>
+							<span class="cmd-output"># Save conversations for documentation</span>
+						</div>
+						<div class="terminal-block">
+							<span class="cmd-prompt">$</span> <span class="cmd-command">find . -name "*.js" | xargs claude "add JSDoc comments"</span>
+							<span class="cmd-output"># Batch operations across multiple files</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Q&A Slide -->
+			<section data-background-color="#0d1117">
+				<h1>Questions?</h1>
+				<p>Let's discuss!</p>
+				<div style="margin-top: 60px;">
+					<p><small>Slides: <a href="#" class="learn-code">github.com/yourusername/claude-control-talk</a></small></p>
+				</div>
+			</section>
+
+			<!-- Resources -->
+			<section>
+				<h3>Resources</h3>
+				<ul class="resources">
+					<li><a href="#" class="learn-more">Claude Documentation</a></li>
+					<li><a href="#" class="learn-more">API Reference</a></li>
+					<li><a href="#" class="learn-more">Community Forum</a></li>
+					<li><a href="#" class="learn-more">Example Projects</a></li>
+				</ul>
+			</section>
+
+			<!-- Thank You -->
+			<section data-markdown>
+				## Thank You!
+				
+				<span class="mind-blown">Stay curious, keep building!</span>
+				
+				[@yourhandle](https://twitter.com/yourhandle)
+				
+				[github.com/yourusername](https://github.com/yourusername)
+			</section>
 		</div>
 	</div>
 
 	<script src="engine/reveal.js"></script>
-	<script src="engine/plugin/chart/chart.min.js"></script>
-	<script src="engine/plugin/chart/plugin.js"></script>
-	<script src="engine/plugin/chalkboard/plugin.js"></script>
 	<script src="engine/plugin/notes/notes.js"></script>
 	<script src="engine/plugin/markdown/markdown.js"></script>
 	<script src="engine/plugin/highlight/highlight.js"></script>
-	<script src="engine/plugin/mermaid/mermaid.js"></script>
+	<script src="engine/plugin/chalkboard/plugin.js"></script>
+	<script src="engine/modern-enhancements.js"></script>
 	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
 		Reveal.initialize({
 			hash: true,
-			chart: {
-				defaults: {
-					global: {
-						title: { fontColor: "#FFF" },
-						legend: {
-							labels: { fontColor: "#FFF" },
-						},
-					},
-					scale: {
-						scaleLabel: { fontColor: "#FFF" },
-						gridLines: { color: "#FFF", zeroLineColor: "#FFF" },
-						ticks: { fontColor: "#FFF" },
-					}
-				},
-				line: { borderColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"], "borderDash": [[5, 10], [0, 0]] },
-				bar: { backgroundColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"] },
-				pie: { backgroundColor: [["rgba(0,0,0,.8)", "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"]] },
-				radar: { borderColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"] },
-			},
-			plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealChart, RevealChalkboard, RevealMermaid]
+			
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealChalkboard ],
+			
+			// Presentation options
+			controls: true,
+			progress: true,
+			center: true,
+			transition: 'fade',
+			
+			// Chalkboard plugin options
+			chalkboard: {
+				boardmarkerWidth: 3,
+				chalkWidth: 7,
+				chalkEffect: 1.0,
+				storage: null,
+				src: null,
+				readOnly: false,
+				messageType: 'broadcast',
+				toggleChalkboardButton: { left: "30px", bottom: "30px", top: "auto", right: "auto" },
+				toggleNotesButton: { left: "30px", bottom: "30px", top: "auto", right: "auto" },
+				colorButtons: true,
+				boardHandle: true,
+				transition: 800,
+				theme: "chalkboard",
+				background: [ 'rgba(127,127,127,.1)' , 'engine/plugin/chalkboard/img/blackboard.png' ],
+				grid: { color: 'rgb(50,50,10,0.5)', distance: 40, width: 2},
+				eraser: { src: 'engine/plugin/chalkboard/img/sponge.png', radius: 20},
+				boardmarkers : [
+						{ color: 'rgba(100,100,100,1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-black.png), auto'},
+						{ color: 'rgba(30,144,255, 1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-blue.png), auto'},
+						{ color: 'rgba(220,20,60,1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-red.png), auto'},
+						{ color: 'rgba(50,205,50,1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-green.png), auto'},
+						{ color: 'rgba(255,140,0,1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-orange.png), auto'},
+						{ color: 'rgba(150,0,150,1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-purple.png), auto'},
+						{ color: 'rgba(255,220,0,1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-yellow.png), auto'}
+				]
+			}
+		});
+
+		// Lazy load heavy plugins
+		let chartLoaded = false;
+		let mermaidLoaded = false;
+
+		Reveal.on('slidechanged', event => {
+			// Check if current slide needs Chart.js
+			if (!chartLoaded && event.currentSlide.querySelector('[data-chart]')) {
+				chartLoaded = true;
+				const script = document.createElement('script');
+				script.src = 'engine/plugin/chart/chart.min.js';
+				script.onload = () => {
+					const chartScript = document.createElement('script');
+					chartScript.src = 'engine/plugin/chart/plugin.js';
+					chartScript.onload = () => {
+						Reveal.registerPlugin('RevealChart', RevealChart);
+						Reveal.sync();
+					};
+					document.body.appendChild(chartScript);
+				};
+				document.body.appendChild(script);
+			}
+
+			// Check if current slide needs Mermaid
+			if (!mermaidLoaded && event.currentSlide.querySelector('.mermaid')) {
+				mermaidLoaded = true;
+				const script = document.createElement('script');
+				script.src = 'engine/plugin/mermaid/mermaid.js';
+				script.onload = () => {
+					Reveal.registerPlugin('RevealMermaid', RevealMermaid);
+					Reveal.sync();
+				};
+				document.body.appendChild(script);
+			}
 		});
 	</script>
 </body>
-
 </html>
