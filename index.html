@@ -7,38 +7,20 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-	<meta name="description" content="Claude Control - Using Claude AI for efficient software development.">
+	<meta name="description" content="Claude Code - Using Claude Code CLI for efficient software development.">
 	<meta name="author" content="Thushan Fernando">
 
-	<title>Claude Control (2025)</title>
+	<title>Claude Code (2025)</title>
 
 	<link rel="stylesheet" href="engine/reset.css">
 	<link rel="stylesheet" href="engine/reveal.css">
 	<link rel="stylesheet" href="engine/theme/modern-dark.css" id="theme">
 	<link rel="stylesheet" href="engine/modern.css">
+	<link rel="stylesheet" href="engine/thushan.css">
+	<link rel="stylesheet" href="engine/claude.css">
 	<link rel="stylesheet" href="engine/plugin/highlight/claude-dark.css" id="highlight-theme">
 	<style>
-		/* Claude Code terminal header style */
-		.claude-header {
-			background: #2a2a2a;
-			border: 2px solid #CF7D5B;
-			border-radius: 6px;
-			padding: 0px 20px;
-			margin: 20px auto 60px;
-			max-width: fit-content;
-			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-			display: inline-block;
-		}
-		
-		.claude-header-title {
-			color: #d4d4d4;
-			font-size: 16px;
-			font-family: var(--font-family-mono);
-			margin: 0;
-			font-weight: 300;
-			letter-spacing: 0.5px;
-		}
-		
+		/* Presentation-specific styles */
 		.author-header {
 			background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
 			border: 1px solid #444;
@@ -121,6 +103,9 @@
 			border-radius: 50%;
 			border: 2px solid #444;
 			background: #1a1a1a;
+			background-image: url('https://media.licdn.com/dms/image/v2/D5603AQGJzlomNE5kqA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1676539323661?e=2147483647&v=beta&t=TdEGZPzzTDvbeMELBWdQYz4Zmv65yZOOMHV0DN4k2-o');
+			background-size: cover;
+			background-position: center;
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -138,6 +123,7 @@
 			text-align: center;
 			padding-top: 50px;
 		}
+
 	</style>
 </head>
 <body>
@@ -146,14 +132,14 @@
 			<!-- Title Slide -->
 			<section class="title-slide">
 				<img src="assets/img/claude-code.png" alt="Claude Code Header" class="boring center">
-				<div class="claude-header">
-					<p class="claude-header-title">✨ Using <strong>Claude Code</strong> in July 2025</p>
-				</div>
 				<br />
+				<div class="claude-header">
+					<p class="claude-header-title"><span class="claude-brand">✻</span> Effectively using <strong>Claude Code</strong> in July 2025</p>
+				</div>
 				<br />
 				<div class="author-header">
 					<div class="author-header-content">
-						<div class="author-avatar">TF</div>
+						<div class="author-avatar"></div>
 						<div class="author-info">
 							<p class="author-header-title">Thushan Fernando</p>
 							<p class="author-header-github">
@@ -167,250 +153,859 @@
 				</div>
 			</section>
 
-			<!-- Introduction -->
 			<section>
-				<h2>What is Claude Control?</h2>
-				<ul class="idea">
-					<li>AI pair programming assistant</li>
-					<li>Integrated development environment</li>
-					<li>Natural language to code</li>
-					<li>Context-aware suggestions</li>
-				</ul>
+				<section class="center-vertical">
+					<h2>Did you know?</h2>
+					<img src="assets/img/all-roads-to-claude.excalidraw.png" alt="Claude For All" class="boring center">
+				</section>
+				
+				<section class="center-vertical">										
+					<img src="assets/img/tell-tale.jpg" alt="You're Absolutely Right" class="boring center">
+				</section>
 			</section>
 
-			<!-- Demo: Terminal Command -->
+			<section class="center-vertical">
+				<h2>State of Play</h2>
+				<h3>Claude Chat</h3>
+				<span class="highlight-pink">claude.ai</span>
+			</section>
+
 			<section>
-				<h3>Simple Terminal Demo</h3>
-				<div class="terminal-window">
-					<div class="terminal-header">
-						<span class="terminal-button close"></span>
-						<span class="terminal-button minimize"></span>
-						<span class="terminal-button maximize"></span>
-						<span class="terminal-title">Terminal - bash</span>
-					</div>
-					<div class="terminal-content">
-						<div class="terminal-block">
-							<span class="cmd-prompt">$</span> <span class="cmd-command">claude "create a Python hello world"</span>
-							<span class="cmd-output">Creating hello_world.py...</span>
-							<span class="cmd-output">✓ File created successfully</span>
+				<section>
+					<h3>Enter Claude Code...</h3>
+					<div class="terminal-window terminal-tall">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude</span>
+								<span class="cmd-output">
+									
+									<div class="claude-header-mini">
+										<p class="claude-header-title-mini"><span class="claude-brand">✻</span> Welcome to <strong>Claude Code</strong></p>
+									</div>								
+<pre class="claude-ascii-art">
+ ██████╗██╗      █████╗ ██╗   ██╗██████╗ ███████╗
+██╔════╝██║     ██╔══██╗██║   ██║██╔══██╗██╔════╝
+██║     ██║     ███████║██║   ██║██║  ██║█████╗  
+██║     ██║     ██╔══██║██║   ██║██║  ██║██╔══╝  
+╚██████╗███████╗██║  ██║╚██████╔╝██████╔╝███████╗
+ ╚═════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝
+
+ ██████╗ ██████╗ ██████╗ ███████╗                
+██╔════╝██╔═══██╗██╔══██╗██╔════╝                
+██║     ██║   ██║██║  ██║█████╗                  
+██║     ██║   ██║██║  ██║██╔══╝                  
+╚██████╗╚██████╔╝██████╔╝███████╗
+ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝</pre>
+									<p>Press <strong>ENTER</strong> to continue</p>
+								</span>
+							</div>
 						</div>
 					</div>
-				</div>
-			</section>
-
-			<!-- Claude Interaction -->
-			<section>
-				<h3>Claude Conversation</h3>
-				<div class="claude-prompt">
-					Help me refactor this function to be more efficient
-				</div>
-				<div class="claude-response fragment">
-					I'll help you refactor the function. Here's an improved version that reduces complexity from O(n²) to O(n) using a hash map approach...
-				</div>
-			</section>
-
-			<!-- Code Comparison -->
-			<section>
-				<h3>Before & After</h3>
-				<div class="code-compare">
-					<div class="code-before">
-						<span class="code-label">Before</span>
-						<pre><code class="language-python">def find_duplicates(arr):
-    duplicates = []
-    for i in range(len(arr)):
-        for j in range(i+1, len(arr)):
-            if arr[i] == arr[j]:
-                duplicates.append(arr[i])
-    return duplicates</code></pre>
+				</section>
+				<section>
+					<h3>Claude Code is ready!</h3>
+					<div class="terminal-window terminal-tall">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content claude-ready-terminal">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude</span>								
+								<span class="cmd-output">
+									<div class="claude-header-mini">
+										<p class="claude-header-title-mini"><span class="claude-brand">✻</span> Welcome to <strong>Claude Code</strong>!</p>
+										<p><span class="claude-hint">/help</span> for help, <span class="claude-hint">/status</span> for your current setup</p>
+										<p>cwd: <span class="claude-path">/home/thushan/projects/talk-claude-code/</span></p>
+									</div>
+									<div class="claude-ready-info">
+										<p>Tips for getting started:</p>
+										<ol style="margin-left: 10px; padding-left: 15px;">
+											<li>Run /init to create a CLAUDE.md file with instructions for Claude</li>
+											<li>Use Claude to help with file analysis, editing, bash commands and git</li>
+											<li>Be as specific as you would with another engineer for the best results</li>
+										</ol>
+									</div>
+									<div class="claude-ready-prompt">
+										<span class="claude-prompt-symbol">&gt;</span><span class="blinking-cursor">█</span>
+									</div>
+								</span>
+							</div>
+						</div>
 					</div>
-					<div class="code-after">
-						<span class="code-label">After</span>
-						<pre><code class="language-python">def find_duplicates(arr):
-    seen = set()
-    duplicates = set()
-    for item in arr:
-        if item in seen:
-            duplicates.add(item)
-        seen.add(item)
-    return list(duplicates)</code></pre>
-					</div>
-				</div>
+				</section>
 			</section>
 
-			<!-- VSCode Terminal -->
 			<section>
-				<h3>VSCode Integration</h3>
-				<div class="vscode-terminal">
+				<section>
+					<h2>What is Claude Code?</h2>
+					<ul class="idea">
+						<li class="fragment"><strong>Agentic CLI tool</strong> for code assistance and automation.</li>
+						<li class="fragment">Understands the entire codebase - no manual selection required.</li>
+						<li class="fragment">Analyses, documents, refactors, debugs and write tests for you.</li>
+						<li class="fragment">Analyses your task, creates a plan, executes on it with safety.</li>
+						<li class="fragment brain-item">Can switch models (Eg. Opus 4) for deeper thinking</li>
+						<li class="fragment skull-item">Multiple execution modes: Default, Plan, Auto... even <strong>YoLo</strong> 🪩</li>
+						<li class="fragment">Editor-agnostic with hooks + per-project config support.</li>
+						<li class="fragment frown-item">CLI editing is clunky, but we'll ways to overcome this</li>
+						<li class="fragment" style="list-style-type: '🪟'; ">Natively supports Windows now, but bash commands!</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Mammoth Refactor: Olla</h2>
+					<div class="scrollable-image-container">
+						<img src="assets/img/olla-refactor.png" alt="Olla Refactor">
+					</div>
+				</section>
+				<section>
+					<h2>Clunky Chunky Claude Code</h2>
+					<img src="assets/img/paste-prompt.png" alt="Pasting a prompt">
+					<p class="fragment">Pasting a prompt into the terminal can be a bit awkward.</p>
+				</section>
+				<section>
+					<h2>So like Cursor / Windsurf / Junie?</h2>
+					<ul class="idea">
+						<li class="fragment"><strong>Cursor / Windsurf:</strong> IDE-first, VS Code LangServer</li>
+						<li class="fragment"><strong>Junie:</strong> IDE-first, Jetbrains Context + ML Models</li>
+						<li class="fragment"><strong>Claude Code:</strong> Terminal-first, editor-agnostic</li>
+						<li class="fragment">All are agentic - Claude Code just prefers a shell over a sidebar.</li>
+						<li class="fragment"><strong>Modes:</strong> Plan, Auto, YoLo vs. manual confirm (Cursor) or auto-patch (Windsurf), Brave Mode (Junie)</li>
+						<li class="fragment"><strong>Context usage:</strong> CC uses full 200k; Cursor chunks; Windsurf tracks active files, Junie intelligently manages context</li>
+						<li class="fragment"><strong>Stability:</strong> CC is responsive & can interact as needed during session</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>Windsurf's Cascade Agent is more hands-off, auto-patching and running tests</li>
+							<li>Cursor gives fine-grained user control via a right-hand AI panel</li>
+							<li>Claude Code remains cost-transparent and robust during long/complex sessions</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h2>Matter of Cost</h2>
+					<ul class="idea">
+						<li class="fragment"><strong>Claude Code:</strong> Tracks and displays token usage live</li>
+						<li class="fragment">Use via existing Plan (Claude) or pay-as-you-go</li>
+						<li class="fragment">No surprise charges - we'll look at some tooling to track usage</li>
+						<li class="fragment">Cursor and Windsurf: pricing varies by tier, usage less visible</li>
+						<li class="fragment"><strong>Both have limits</strong>, depends on tier and how much you use</li>
+						<li class="fragment" style="list-style-type: '🐎';"><strong>Claude</strong>, may tell you hold yer horses for a bit</li>
+					</ul>
+
+					<aside class="notes">
+						<ul>
+							<li>Claude Code gives inline visibility into token usage and cost per operation</li>
+							<li>Especially useful for teams or heavy users managing spend</li>
+							<li>Cursor/Windsurf may require subscription tiers or usage estimation</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Let's Recap: Claude Models</h2>
+					<div class="feature-grid-3">
+						<div class="feature-card fragment">
+							<h4>🚀 Haiku</h4>
+							<p>Fastest and most cost-effective. Great for <strong>lightweight coding tasks</strong>, scripts and automation flows.</p>
+							<div class="feature-card-footer">
+								⚡🧠 <span class="separator">•</span> 💵
+							</div>
+						</div>
+						<div class="feature-card fragment">
+							<h4>🔥 Sonnet</h4>
+							<p>Balanced power and speed. Ideal for <strong>everyday dev tasks</strong>, debugging and broader code edits.</p>
+							<div class="feature-card-footer">
+								🧠🛠️ <span class="separator">•</span> 💵💵
+							</div>
+						</div>
+						<div class="feature-card fragment">
+							<h4>🧠 Opus</h4>
+							<p>Most capable. Best for <strong>complex reasoning</strong>, deep refactors and multi-step agentic workflows.</p>
+							<div class="feature-card-footer">
+								🧠🛠️🔍🦾 <span class="separator">•</span> 💵💵💵
+							</div>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h2>Let's Recap: Claude Code Pricing</h2>
+					<div class="feature-grid-2">
+						<div class="feature-card fragment">
+							<h4>💳 Claude Plan</h4>
+							<p>Use your <strong>existing Anthropic Claude</strong> monthly or prepaid yearly plan with Claude Code.</p>							
+							<p>Pro / Max (5x | 20x) Levels - <a href="https://www.anthropic.com/pricing">see plans</a></p>
+							<div class="feature-card-footer">
+								Great for regular predictable usage
+							</div>
+						</div>
+						<div class="feature-card fragment">
+							<h4>💸 Pay As You Go</h4>
+							<p>For periods of <strong>heavy, short-term demand</strong>, such as codebase migrations, massive refactoring, hackathons or crunch time.</p>
+							<div class="feature-card-footer">
+								When you have variable or bursty usage
+							</div>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h2>Let's Recap: Claude Pricing - PAYG API Credits</h2>
+					<table class="pricing-table fragment">
+						<thead>
+							<tr>
+								<th>Model</th>
+								<th>Input</th>
+								<th>Output</th>
+								<th>Context</th>
+								<th>Best For</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="fragment">
+								<td>
+									<div class="model-name">
+										<span class="model-icon">🚀</span>
+										<span>Haiku 3.5</span>
+									</div>
+								</td>
+								<td class="price-highlight">$0.80 / 1M</td>
+								<td class="price-highlight">$4 / 1M</td>
+								<td>200K</td>
+								<td>Quick edits, simple tasks</td>
+							</tr>
+							<tr class="fragment">
+								<td>
+									<div class="model-name">
+										<span class="model-icon">🔥</span>
+										<span>Sonnet 4</span>
+									</div>
+								</td>
+								<td>$3 / 1M</td>
+								<td>$15 / 1M</td>
+								<td>200K</td>
+								<td>Daily development</td>
+							</tr>
+							<tr class="fragment">
+								<td>
+									<div class="model-name">
+										<span class="model-icon">🧠</span>
+										<span>Opus 4</span>
+									</div>
+								</td>
+								<td class="price-premium">$15 / 1M</td>
+								<td class="price-premium">$75 / 1M</td>
+								<td>200K</td>
+								<td>Complex refactors</td>
+							</tr>
+							<tr class="fragment">
+								<td colspan="5" style="text-align: center; padding-top: 25px;">
+									<small>💡 <em>Prices as of June 2025. 1M = 1 million tokens</em></small>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h2>Claude Model Citizen</h2>
+					<p>With a Subscription, you'll have limits...<span class="fragment">...and Claude will tell you!</span></p>
+					<p class="fragment">
+						<img src="assets/img/approaching-limits.png" alt="Approaching Limits" style="width: 100%; max-width: 600px;"/>
+					</p>
+					<p class="fragment">
+						You'll auto-switch from Opus to Sonnet when you do!
+						<img src="assets/img/limits-reached-downgrade.png" alt="Limits Reached Downgrade" style="width: 100%; max-width: 600px;"/>
+					</p>
+				</section>
+			</section>
+			<section>
+				<section class="center-vertical">
+					<h2>Grand Tour</h2>
+					<h3>Claude Code</h3>
+					<a href="https://www.anthropic.com/claude-code">anthropic.com/claude-code</a>
+					<p class="fragment" style="margin-top: 50px;">
+						<small class="highlight-yellow">Make sure you have Node v18+</small>
+					</p>
+				</section>
+				<section>
+					<h3>Install Claude Code</h3>
+					<div class="terminal-window">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">npm install -g @anthropic-ai/claude-code</span>
+								<span class="cmd-output">
+added 3 packages in 777ms <br />
+<br />
+2 packages are looking for funding<br />
+  run `npm fund` for details<br />
+								</span>
+							</div>
+							<div class="terminal-block fragment">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude --version</span>
+								<span class="cmd-output">
+1.0.57 (Claude Code)
+								</span>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h3>Configure Claude Code</h3>
+					<div class="terminal-window">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content claude-ready-terminal">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude</span>								
+								<span class="cmd-output">
+									<div class="claude-header-mini">
+										<p class="claude-header-title-mini"><span class="claude-brand">✻</span> Welcome to <strong>Claude Code</strong></p>
+									</div>
+									<div class="claude-ready-info">
+										<p>Let's get started.</p>
+										<p>Choose the text style that looks the best with your terminal:</p>
+										...
+									</div>
+								</span>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h3>Configure Claude Code</h3>
+					<div class="terminal-window">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content claude-ready-terminal">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude</span>								
+								<span class="cmd-output">
+									<div class="claude-header-mini">
+										<p class="claude-header-title-mini"><span class="claude-brand">✻</span> Welcome to <strong>Claude Code</strong></p>
+									</div>
+									<div class="claude-ready-info">
+										<p>Claude Code can now be used with your Claude subscription or billed based on API usage through your Console account.</p>
+										<p>Select login method:</p>
+										<ol style="margin-left: 10px; padding-left: 25px;">
+											<li>Claude account with subscription <br/>
+												<span class="claude-subtitle">Starting at $20/mo for Pro, $100/mo for Max - Best value, predictable pricing</span>
+											</li>
+											<li>Anthropic Console account <br/>
+												<span class="claude-subtitle">API usage billing</span>
+											</li>
+										</ol>
+									</div>
+								</span>
+							</div>
+						</div>
+					</div>
+				</section>
+			</section>
+			
+
+			<!-- Claude Concepts -->
+			<section>
+				<section class="center-vertical">
+					<h2>Claude Concepts</h2>
+					<span class="highlight-yellow">the basics</span>				
+				</section>
+				<section>
+					<h2>Claude Code Modes</h2>
+					<ul class="idea" style="font-size: 0.9em;">
+						<li class="fragment"><strong>Plan Mode</strong> (readonly) <kbd>Shift</kbd>+<kbd>TAB</kbd><br/>
+						Claude will analyse & research the codebase, then present a plan of action.
+						<p class="fragment">Avoids the 'don't code, just asking' messages.</p>
+						<p class="fragment">No unwanted edits, consistent formatted response & efficient token use</p>
+						</li>
+						<li class="fragment"><strong>Auto Mode</strong> (regular) <kbd>Shift</kbd>+<kbd>TAB</kbd><br/>
+						Claude will automatically edit files, run commands and execute on plan.
+						</li>
+					</ul>
+					<p class="fragment" style="font-size: 0.8em;">TIP: Plan into an md file, iterate then execute in Auto mode.</p>
+				</section>	
+				<section>
+					<h2>Importance of Claude.md</h2>
+					<p class="fragment"><code>Claude.md</code> is a succinct <strong>project-specific instruction file</strong>.</p>
+					<ul class="idea">
+						<li class="fragment">Declared tech stack and version info</li>
+						<li class="fragment">Key folders and their responsibilities</li>
+						<li class="fragment">Essential commands for build, test, deploy</li>
+						<li class="fragment">Code style and formatting rules</li>
+						<li class="fragment">Branch names and commit message style</li>
+						<li class="fragment">Important files Claude should know about</li>
+						<li class="fragment">Areas Claude must never change</li>
+					</ul>
+					<p class="fragment">Bit like <code>.cursor/rules/</code> or <code>.junie/guidelines.md</code></p>
+				</section>		
+				<section>
+					<h2>Example Claude.md</h2>
+					<div class="vscode-terminal terminal-tall-scroll">
 					<div class="vscode-tabs">
-						<div class="vscode-tab active" data-tab="terminal">Terminal</div>
-						<div class="vscode-tab" data-tab="output">Output</div>
-						<div class="vscode-tab" data-tab="debug">Debug Console</div>
+						<div class="vscode-tab active" data-tab="terminal">C# Web App</div>
+						<div class="vscode-tab" data-tab="output">Python</div>
 					</div>
 					<div class="vscode-terminal-content">
-						<!-- Terminal Tab Content -->
 						<div class="tab-content" id="terminal-content" style="display: block;">
 							<div class="terminal-block">
-								<span class="prompt">PS</span> <span class="path">D:\projects\myapp></span> <span class="command">claude --help</span>
-							</div>
-							<div class="terminal-block">
-								<span class="cmd-output">Usage: claude [options] [command]
+								<pre class="cmd-output"># Project Overview
 
-Commands:
-  init       Initialize Claude in current directory
-  chat       Start interactive chat session
-  generate   Generate code from prompt
-  review     Review code for improvements
+This is a .NET 8 C# web application using ASP.NET Core, Entity Framework Core, and Razor Pages.
+It’s a multi-layered architecture with Models, Services, and Controllers.
 
-Options:
-  -h, --help     Show help
-  -v, --version  Show version number</span>
+## Tech Stack
+
+- .NET 8
+- ASP.NET Core
+- C#
+- Entity Framework Core
+- SQL Server
+- xUnit for tests
+
+## Project Structure
+
+- `Controllers/` → API endpoints (REST)
+- `Models/` → Domain models and DTOs
+- `Services/` → Business logic
+- `Data/` → DBContext and EF configurations
+- `Pages/` or `Views/` → Razor Pages or MVC Views
+- `wwwroot/` → Static assets
+- `Tests/` → Unit tests (xUnit)
+
+## Commands
+
+- `dotnet build`
+- `dotnet run`
+- `dotnet test`
+- `dotnet ef migrations add <Name>`
+- `dotnet ef database update`
+
+## Code Style
+
+- Use PascalCase for public types and methods
+- Use camelCase for private fields
+- Async methods end in `Async`
+- Use expression-bodied members where clear
+- Prefer dependency injection via constructor
+
+## Repository Guidelines
+
+- Branches: `feature/ABC-123-name`, `bugfix/ABC-456-name`
+- Commits: `<type>: short summary` (e.g., `fix: handle null in service`)
+- Prefer squash and merge
+
+## Important Files
+
+- `Program.cs`, `Startup.cs` → App entry/config
+- `appsettings.json` → Configuration
+- `Data/ApplicationDbContext.cs` → DB context
+- `Services/*.cs` → Core business logic
+
+## Do Not Touch
+
+- Legacy integrations in `Services/Legacy/`
+- `Startup.cs` bootstrapping unless explicitly asked
+- Auth setup in `Program.cs` unless requested
+- Do not generate UI markup unless requested
+
+</pre>
 							</div>
 						</div>
-						<!-- Output Tab Content -->
 						<div class="tab-content" id="output-content" style="display: none;">
 							<div class="terminal-block">
-								<span class="cmd-output">[Claude Code] Initializing...
-[Claude Code] Connected to language server
-[Claude Code] Ready - v1.0.0
-[Claude Code] Workspace: D:\projects\myapp
-[Claude Code] Active extensions: Python, JavaScript, TypeScript</span>
+								<pre class="cmd-output">
+# Project Overview
+
+Python 3.11 project for data processing + API backend using FastAPI and SQLAlchemy.
+Structured for clarity, testability, and CLI usage.
+
+## Tech Stack
+
+- Python 3.11
+- FastAPI
+- SQLAlchemy
+- Alembic (migrations)
+- Pytest
+- Pydantic (schema validation)
+
+## Project Structure
+
+- `app/` → Main app code
+  - `api/` → Route handlers
+  - `models/` → DB models (SQLAlchemy)
+  - `schemas/` → Pydantic models
+  - `services/` → Business logic
+  - `core/` → Settings, logging, startup
+- `tests/` → Pytest-based unit/integration tests
+- `migrations/` → Alembic migration scripts
+- `scripts/` → One-off utilities
+
+## Commands
+
+- `uvicorn app.main:app --reload`
+- `pytest`
+- `alembic upgrade head`
+- `black .` (format)
+- `mypy .` (type checks)
+
+## Code Style
+
+- Use `black`, `ruff`, `mypy`
+- Type hint everything
+- Prefer f-strings
+- One class/function per file where possible
+- Avoid global state
+
+## Repo Etiquette
+
+- Branches: `feature/ABC-123-name`
+- Commits: `feat: short summary`, `fix: ...`, `refactor: ...`
+- Prefer PRs with linked issues
+
+## Core Files
+
+- `app/main.py` → FastAPI app
+- `app/core/settings.py` → Env config
+- `app/models/base.py` → Declarative base
+- `app/services/*.py` → App logic
+- `scripts/*.py` → CLI tools
+
+## Do Not Touch
+
+- `.env` and `settings.py` config handling
+- Alembic-generated scripts
+- Migration history in `migrations/`
+- Legacy adapter modules in `app/integrations/`
+
+								</pre>
 							</div>
 						</div>
-						<!-- Debug Console Tab Content -->
-						<div class="tab-content" id="debug-content" style="display: none;">
+					</div>
+				</div>
+				</section>	
+
+				<section>
+					<h2>Claude.md Locations</h2>
+					<table class="pricing-table compact fragment">
+						<thead>
+							<tr>
+								<th>Location</th>
+								<th>Scope</th>
+								<th>Use Case</th>
+								<th>VCS Safe?</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="fragment">
+								<td><code>~/.claude/CLAUDE.md</code></td>
+								<td>Global</td>
+								<td>Personal defaults, universal behaviours</td>
+								<td>No (local-only)</td>
+							</tr>
+							<tr class="fragment">
+								<td><code>your-repo/CLAUDE.md</code></td>
+								<td>Project-wide</td>
+								<td>Team-wide shared context</td>
+								<td>✅ Yes</td>
+							</tr>
+							<tr class="fragment">
+								<td><code>your-repo/feature/CLAUDE.md</code></td>
+								<td>Scoped</td>
+								<td>Fine-grained control per folder/feature</td>
+								<td>✅ Yes</td>
+							</tr>
+							<tr class="fragment">
+								<td><code>CLAUDE.local.md</code></td>
+								<td>Local override</td>
+								<td>Personal tweaks not checked into git</td>
+								<td>No (add to <code>.gitignore</code>)</td>
+							</tr>
+							<tr class="fragment">
+								<td colspan="4" style="text-align: center; padding-top: 25px;">
+									<small>💡 <em>Files are merged in order: local → subdir → project → global</em></small>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section>
+					<h2>Generate & Refine <code>Claude.md</code></h2>					
+					<div class="terminal-window">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content claude-ready-terminal">
 							<div class="terminal-block">
-								<span class="cmd-output" style="color: #ce9178;">Debug: Claude Code extension activated
-Debug: Loading user preferences...
-Debug: Context window: 200k tokens
-Debug: Model: claude-3-opus-20240229
-Debug: Temperature: 0.2</span>
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude /init</span>								
+								<span class="cmd-output">
+									<div class="claude-ready-info">
+										<p>I'll analyze the codebase to create a comprehensive CLAUDE.md file. Let me start by exploring the project structure and key files.</p>
+										<p>Update Todos</p>
+										<ol style="margin-left: 10px; padding-left: 5px; margin-top:-10px; list-style-type: none;">
+											<li>☐ Explore project structure and identify key directories</li>
+											<li>☐ Read README.md and other documentation files</li>
+											<li>☐ Analyze build configuration and scripts</li>
+											<li>☐ Identify testing framework and commands</li>
+											<li>☐ Create comprehensive CLAUDE.md file</li>
+											<li>☐ Check for existing CLAUDE.md, Cursor rules, or Copilot instructions</li>
+										</ol>
+										<p>
+											
+										<p class="claude-header-title-mini">
+											<span class="claude-brand">✻ Herding…</span> (220s · ⚒ 1.4k tokens · esc to interrupt)
+										</p>
+									</div>
+								</span>
 							</div>
 						</div>
 					</div>
-				</div>
+					<p class="github-link">
+						<svg class="github-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+						</svg>
+						<a href="https://github.com/keepassxreboot/keepassxc">keepassxreboot/keepassxc</a>
+					</p>
+				</section>
+				<section>
+					<h2>Getting Started</h2>
+					<div class="feature-grid-2" style="font-size: 0.9em;">
+						<div class="feature-card fragment">
+							<h4>📗 Greenfields</h4>
+							<ul style="text-align: left;">
+								<li>Always setup git / vcs</li>
+								<li><code>docs/</code> & <code>docs/_prompts</code></li>
+								<li>Establish coding standards</li>
+								<li>Incrementally engineer</li>
+								<li>Opt for TDD Style</li>
+								<li>Encourage tests in prompts</li>
+							</ul>
+							<div class="feature-card-footer">
+								Tests are your safety net & friend
+							</div>
+						</div>
+						<div class="feature-card fragment">
+							<h4>📙 Brownfields</h4>							
+							<ul style="text-align: left;">
+								<li>Use git worktrees / branches</li>
+								<li>Generate / Tweak <code>Claude.md</code></li>
+								<li>Generate <code>docs/</code> for context</li>
+								<li>Understand existing patterns</li>
+								<li>Incremental improvements</li>
+								<li>Isolated, non-critical components</li>
+							</ul>
+							<div class="feature-card-footer">
+								Incremental improvements, VCS & tests.
+							</div>
+						</div>
+					</div>
+				</section>
 			</section>
 
-			<!-- Features Grid -->
-			<section>
-				<h3>Key Features</h3>
-				<div class="feature-grid">
-					<div class="feature-card">
-						<h4><span class="rocket"></span>Fast Generation</h4>
-						<p>Generate boilerplate code, tests, and documentation in seconds</p>
-					</div>
-					<div class="feature-card">
-						<h4><span class="fire"></span>Smart Refactoring</h4>
-						<p>Improve code quality with AI-powered suggestions</p>
-					</div>
-					<div class="feature-card">
-						<h4><span class="star"></span>Context Aware</h4>
-						<p>Understands your project structure and coding patterns</p>
-					</div>
-				</div>
-			</section>
-
-			<!-- Live Demo Section -->
-			<section data-background-color="#161b22">
+			<section data-background-color="#161b22" class="center-vertical">
 				<h2>Live Demo Time!</h2>
-				<p class="fragment">Let's build something together...</p>
+				<p class="highlight-pink">Little less conversation,<br/>& lot more action!</p>
 			</section>
 
-			<!-- Command Examples -->
 			<section>
-				<h3>Common Commands</h3>
-				<div class="terminal-window">
-					<div class="terminal-header">
-						<span class="terminal-button close"></span>
-						<span class="terminal-button minimize"></span>
-						<span class="terminal-button maximize"></span>
-						<span class="terminal-title">Terminal - bash</span>
+				<section class="center-vertical">
+					<h2>Claude Concepts</h2>
+					<span class="highlight-green">the advanced</span>				
+				</section>
+				<section>
+					<h3>Claude The Thinker</h3>
+					<p class="fragment">
+						You can encourage Claude to think harder with certain keywords in prompt.
+					</p>
+					<ul class="idea fragment">
+						<li>think</li>
+						<li>think harder</li>
+						<li>ultrathink</li>
+					</ul>
+					<p class="fragment"><small><code>ultrathink</code> is ideal for Opus model usage</small></p>
+					<p class="fragment"><small><code>ultrathink</code> apparently allocates ~32K tokens</small></p>
+					<p class="fragment">Claude gives more consideration to planning, design & debugging</p>
+				</section>
+				<section>
+					<h3>Claude The Forgetful</h3>
+					<p class="fragment">
+						Claude doesn't remember past sessions...<br/>
+						<span class="fragment">...it builds short-term memory as you work.</span>
+					</p>
+					<ul class="idea fragment">
+						<li>200K token context limit (Opus)</li>
+						<li>Session memory grows with each action</li>
+						<li>Earlier context may get trimmed</li>
+					</ul>
+					<p class="fragment">
+						Use <code>/compact</code> to summarise your session and free up context.
+					</p>
+					<p class="fragment"><small>Helps before long tasks like <code>refactors</code> or <code>tests</code> code/fixes</small></p>
+					<p class="fragment"><small>Doesn't persist anything — just condenses runtime memory</small></p>
+				</section>
+				<section>
+					<h3>Claude Memory Management</h3>
+					<p class="fragment">
+						Claude Code does manage it's own memory...<br/>
+						<img src="assets/img/auto-compact.png" alt="Auto Compact" style="width: 100%; max-width: 600px;"/>
+					</p>
+					<p class="fragment">
+						...but you can help it out.<br/>
+						<img src="assets/img/compact-memory.png" alt="Compact Memory" style="width: 200%; max-width: 600px;"/>
+					</p>
+				</section>
+				<section>
+					<h3>Yolo Mode</h3>
+					<p class="fragment">Use with caution - no confirmation, no plan, just do it, Claude.</p>					
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude --dangerously-skip-permissions </span>
+								<span class="cmd-output">
+									# ***Use with caution***, preferably under WSL / jail <br/>
+									# Claude Code executes all operations without any permission prompts, including file modifications, command execution and system operations. <br/>
+									# The flag name deliberately includes "dangerously" to signal the security implications of removing all restrictions.
+								</span>
+							</div>
+						</div>
 					</div>
-					<div class="terminal-content">
-						<div class="terminal-block">
-							<span class="cmd-prompt">$</span> <span class="cmd-command">claude "create a user registration endpoint"</span>
-							<span class="cmd-output"># Generate a REST API endpoint</span>
-						</div>
-						<div class="terminal-block">
-							<span class="cmd-prompt">$</span> <span class="cmd-command">claude "add try-catch error handling to this function"</span>
-							<span class="cmd-output"># Add error handling</span>
-						</div>
-						<div class="terminal-block">
-							<span class="cmd-prompt">$</span> <span class="cmd-command">claude "write unit tests for the UserService class"</span>
-							<span class="cmd-output"># Write unit tests</span>
-						</div>
-						<div class="terminal-block">
-							<span class="cmd-prompt">$</span> <span class="cmd-command">claude "explain what this regex does: ^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"</span>
-							<span class="cmd-output"># Explain code</span>
-						</div>
-					</div>
-				</div>
+					<p class="fragment highlight-red" style="font-size: 0.8em;">Development environments have been destroyed in this mode!</p>
+				</section>
 			</section>
 
-			<!-- Best Practices -->
-			<section>
-				<h3>Best Practices</h3>
-				<ul class="checklist">
-					<li>Be specific in your prompts</li>
-					<li>Review generated code before committing</li>
-					<li>Use Claude for learning, not just generation</li>
-					<li>Maintain consistent coding standards</li>
-					<li>Keep security in mind</li>
-				</ul>
+			<section data-background-color="#161b22" class="center-vertical">
+				<h2>It's Demo Time!</h2>
+				<p class="highlight-green">Jean Claude van Daaaayeeeem!</p>
 			</section>
 
-			<!-- Workflow Diagram -->
 			<section>
-				<h3>Development Workflow</h3>
-				<div class="mermaid">
-					<pre>
-%%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true }}}%%
-flowchart LR
-    A[Write<br/>Prompt] --> B{Claude<br/>Processes}
-    B --> C[Generate<br/>Code]
-    C --> D[Review<br/>Output]
-    D --> E{Satisfied?}
-    E -->|No| F[Refine]
-    F --> B
-    E -->|Yes| G[Implement]
-    G --> H[Test]
-    H --> I[Deploy]
-					</pre>
-				</div>
+				<section class="center-vertical">
+					<h2>Tools for Claude Code</h2>					
+					<span class="highlight-green">10x your 10x</span>
+				</section>
+				<section>
+					<h2>Claude Code VSCode Extension</h2>
+					<a href="https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code">vscode: Claude Code Extension</a>
+
+				</section>
+				<section>
+					<h3>Claude Code Usage</h3>
+					<div class="terminal-window">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">bunx ccusage</span>
+								<span class="cmd-output">
+<pre class="claude-usage-report">
+╭──────────────────────────────────────────╮
+│                                          │
+│  Claude Code Token Usage Report - Daily  │
+│                                          │
+╰──────────────────────────────────────────╯
+
+┌────────────┬────────────────────┬───────────┬───────────┬───────────────┬──────────────┬───────────────┬─────────────┐
+│ Date       │ Models             │     Input │    Output │  Cache Create │   Cache Read │  Total Tokens │  Cost (USD) │
+├────────────┼────────────────────┼───────────┼───────────┼───────────────┼──────────────┼───────────────┼─────────────┤
+│ 2025-07-14 │ - opus-4           │     1,225 │    27,748 │       897,182 │   29,576,651 │    30,502,806 │      $59.63 │
+│            │ - sonnet-4         │           │           │               │              │               │             │
+├────────────┼────────────────────┼───────────┼───────────┼───────────────┼──────────────┼───────────────┼─────────────┤
+│ 2025-07-15 │ - opus-4           │       166 │     5,740 │        85,133 │    1,508,838 │     1,599,877 │       $4.29 │
+├────────────┼────────────────────┼───────────┼───────────┼───────────────┼──────────────┼───────────────┼─────────────┤
+│ 2025-07-16 │ - opus-4           │       429 │    10,594 │       291,712 │    9,421,623 │     9,724,358 │      $20.40 │
+├────────────┼────────────────────┼───────────┼───────────┼───────────────┼──────────────┼───────────────┼─────────────┤
+│ 2025-07-17 │ - opus-4           │       874 │    67,454 │     1,020,404 │   22,927,970 │    24,016,702 │      $58.60 │
+├────────────┼────────────────────┼───────────┼───────────┼───────────────┼──────────────┼───────────────┼─────────────┤
+│ 2025-07-18 │ - opus-4           │     3,088 │   136,700 │     2,581,984 │   65,141,729 │    67,863,501 │     $156.42 │
+├────────────┼────────────────────┼───────────┼───────────┼───────────────┼──────────────┼───────────────┼─────────────┤
+│ 2025-07-19 │ - opus-4           │     3,543 │   164,705 │     2,547,465 │   54,788,136 │    57,503,849 │     $142.35 │
+├────────────┼────────────────────┼───────────┼───────────┼───────────────┼──────────────┼───────────────┼─────────────┤
+│ 2025-07-20 │ - opus-4           │     1,566 │    36,905 │     1,147,892 │   24,487,830 │    25,674,193 │      $61.05 │
+├────────────┼────────────────────┼───────────┼───────────┼───────────────┼──────────────┼───────────────┼─────────────┤
+│ 2025-07-21 │ - opus-4           │       323 │    13,887 │       760,264 │    5,514,827 │     6,289,301 │      $23.57 │
+├────────────┼────────────────────┼───────────┼───────────┼───────────────┼──────────────┼───────────────┼─────────────┤
+│ 2025-07-22 │ - opus-4           │       718 │    16,185 │     1,868,118 │   12,644,390 │    14,529,411 │      $55.22 │
+├────────────┼────────────────────┼───────────┼───────────┼───────────────┼──────────────┼───────────────┼─────────────┤
+│ Total      │                    │    11,932 │   479,918 │    11,200,154 │  226,011,994 │   237,703,998 │     $581.54 │
+└────────────┴────────────────────┴───────────┴───────────┴───────────────┴──────────────┴───────────────┴─────────────┘</pre>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p class="github-link">
+						<svg class="github-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+						</svg>
+						<a href="https://github.com/ryoppippi/ccusage">ryoppippi/ccusage</a>
+					</p>
+				</section>
+				<section>
+					<h3>Claudia</h3>		
+					<p class="github-link">
+						<svg class="github-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+						</svg>
+						<a href="https://github.com/getasterisk/claudia">getAsterisk/claudia</a>
+					</p>			
+					<div class="video-container">
+						<video controls preload="metadata" width="50%">
+							<source src="https://claudiacode.com/claudia-demo.mp4" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+					</div>		
+				</section>
 			</section>
 
-			<!-- Tips & Tricks -->
 			<section>
-				<h3>Pro Tips</h3>
-				<div class="terminal-window">
-					<div class="terminal-header">
-						<span class="terminal-button close"></span>
-						<span class="terminal-button minimize"></span>
-						<span class="terminal-button maximize"></span>
-						<span class="terminal-title">Terminal - bash</span>
-					</div>
-					<div class="terminal-content">
-						<div class="terminal-block">
-							<span class="cmd-prompt">$</span> <span class="cmd-command">claude --context ./src "refactor this module"</span>
-							<span class="cmd-output"># Use context files for better understanding</span>
-						</div>
-						<div class="terminal-block">
-							<span class="cmd-prompt">$</span> <span class="cmd-command">claude chat --save-to conversation.md</span>
-							<span class="cmd-output"># Save conversations for documentation</span>
-						</div>
-						<div class="terminal-block">
-							<span class="cmd-prompt">$</span> <span class="cmd-command">find . -name "*.js" | xargs claude "add JSDoc comments"</span>
-							<span class="cmd-output"># Batch operations across multiple files</span>
-						</div>
-					</div>
-				</div>
+				<h2>Part II: Putting Claude Code To Work</h2>
+				<p>Next time, we'll get our hands dirty with Claude Code</p>
+				<ul>
+					<li>We'll use the AI Toolbelt Roles to build something</li>
+					<li>Claude Code will be our <strong>App Builder</strong></li>
+					<li>We'll look at prompting, multi-agents and worktrees</li>
+					<li>Special surprise Pivot App to build (and maybe deploy)</li>
+				</ul>				
+				<p class="fragment">...but hopefully you can use Claude Code in the meantime</p>
 			</section>
 
 			<!-- Q&A Slide -->
-			<section data-background-color="#0d1117">
+			<section data-background-color="#0d1117" class="center-vertical">
 				<h1>Questions?</h1>
 				<p>Let's discuss!</p>
 				<div style="margin-top: 60px;">
-					<p><small>Slides: <a href="#" class="learn-code">github.com/yourusername/claude-control-talk</a></small></p>
+					<p><small>Slides: <a href="#" class="learn-code">github.com/thushan/talk-claude-code</a></small></p>
 				</div>
 			</section>
 
@@ -418,22 +1013,22 @@ flowchart LR
 			<section>
 				<h3>Resources</h3>
 				<ul class="resources">
-					<li><a href="#" class="learn-more">Claude Documentation</a></li>
-					<li><a href="#" class="learn-more">API Reference</a></li>
-					<li><a href="#" class="learn-more">Community Forum</a></li>
-					<li><a href="#" class="learn-more">Example Projects</a></li>
+					<li><a href="https://www.anthropic.com/claude-code" class="learn-more">Claude Code Home</a></li>
+					<li><a href="https://docs.anthropic.com/en/docs/claude-code/common-workflows" class="learn-more">Claude Code Workflows</a> (Anthropic)</li>
+					<li><a href="https://www.anthropic.com/engineering/claude-code-best-practices" class="learn-more">Claude Code Best Practices</a> (Anthropic)</li>
+					<li><a href="https://publish.obsidian.md/aixplore/AI+Development+%26+Agents/claude-code-best-practices" class="learn-more">Claude Code Best Practices</a> (AIXplore)</li>
+					<li><a href="https://github.com/hesreallyhim/awesome-claude-code">Awesome Claude Code</a></li>
 				</ul>
 			</section>
 
-			<!-- Thank You -->
 			<section data-markdown>
 				## Thank You!
 				
 				<span class="mind-blown">Stay curious, keep building!</span>
 				
-				[@yourhandle](https://twitter.com/yourhandle)
+				[@thushanfernando](https://twitter.com/thushanfernando)
 				
-				[github.com/yourusername](https://github.com/yourusername)
+				[github.com/thushan](https://github.com/thushan)
 			</section>
 		</div>
 	</div>
@@ -451,13 +1046,20 @@ flowchart LR
 		Reveal.initialize({
 			hash: true,
 			
+			// Override default width to use full viewport
+			width: '100%',
+			height: '100%',
+			margin: 0,
+			minScale: 1,
+			maxScale: 1,
+			
 			// Learn about plugins: https://revealjs.com/plugins/
 			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealChalkboard ],
 			
 			// Presentation options
 			controls: true,
 			progress: true,
-			center: true,
+			center: false,
 			transition: 'fade',
 			
 			// Chalkboard plugin options

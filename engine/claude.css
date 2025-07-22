@@ -1,0 +1,249 @@
+/* Claude Code Presentation Specific Styles */
+
+/* Claude Header Styles */
+.claude-header {
+    background: #2a2a2a;
+    border: 2px solid #CF7D5B;
+    border-radius: 6px;
+    padding: 0px 20px;
+    margin: 20px auto 60px;
+    max-width: fit-content;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+}
+
+.claude-header-mini {
+    background: #2a2a2a;
+    border: 2px solid #CF7D5B;
+    border-radius: 6px;
+    padding: 0px 20px;
+    margin: 10px auto 20px;
+    max-width: fit-content;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+}
+
+.claude-header-mini p {
+    margin: 10px 0;
+}
+
+.claude-brand {
+    color: #CF7D5B;
+}
+
+.claude-header-title {
+    color: #d4d4d4;
+    font-size: 16px;
+    font-family: var(--font-family-mono);
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.claude-header-title-mini {
+    color: #d4d4d4;
+    font-size: 14px;
+    font-family: var(--font-family-mono);
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* Claude ASCII Art */
+.terminal-content .claude-ascii-art,
+.reveal .claude-ascii-art {
+    color: #CF7D5B !important;
+    font-family: var(--font-family-mono) !important;
+    font-size: 18px !important;
+    line-height: 1.25 !important;
+    margin: 0px auto !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    white-space: pre !important;
+    overflow: visible !important;
+    font-weight: 700 !important;
+    display: block !important;
+    letter-spacing: -1px !important;
+}
+
+/* Claude Code Entry Screen Styles */
+.claude-terminal .terminal-content {
+    background: #1a1a1a;
+    padding: 20px;
+}
+
+.claude-welcome-screen {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.claude-welcome-header {
+    color: #e8e8e8;
+    font-size: 16px;
+    font-family: var(--font-family-mono);
+    margin-bottom: 30px;
+    text-align: left;
+    padding: 12px 20px;
+    background: rgba(207, 125, 91, 0.1);
+    border: 1px solid rgba(207, 125, 91, 0.3);
+    border-radius: 6px;
+}
+
+.claude-asterisk {
+    color: #CF7D5B;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.claude-code-text {
+    color: #CF7D5B;
+    font-weight: 600;
+}
+
+.claude-prompt-hint {
+    color: #8b949e;
+    font-size: 14px;
+    font-family: var(--font-family-mono);
+    margin-top: 30px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.claude-prompt-hint strong {
+    color: #e8e8e8;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: normal;
+}
+
+/* Claude Code Ready Screen Styles */
+.claude-ready-terminal {
+    padding: 20px !important;
+}
+
+.claude-ready-content {
+    margin-top: 20px;
+}
+
+.claude-ready-header {
+    color: #e8e8e8;
+    font-size: 16px;
+    font-family: var(--font-family-mono);
+    margin-bottom: 20px;
+}
+
+.claude-ready-info {
+    color: #8b949e;
+    font-size: 14px;
+    font-family: var(--font-family-mono);
+    margin-bottom: 10px;
+}
+
+.claude-hint {
+    color: #58a6ff;
+    background: rgba(88, 166, 255, 0.1);
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.claude-subtitle {
+    color: #5a5a5a;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+.claude-usage-report {
+    font-size: 15px !important;
+}
+.claude-ready-cwd {
+    color: #8b949e;
+    font-size: 14px;
+    font-family: var(--font-family-mono);
+    margin-bottom: 20px;
+}
+
+.claude-path {
+    color: #79c0ff;
+}
+
+.claude-ready-prompt {
+    font-family: var(--font-family-mono);
+    font-size: 16px;
+    margin-top: 30px;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    padding: 10px 15px;
+}
+
+.claude-prompt-symbol {
+    color: #58a6ff;
+    margin-right: 10px;
+    font-weight: 600;
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+.blinking-cursor {
+    color: #e8e8e8;
+    animation: blink 1s infinite;
+    font-weight: normal;
+    display: inline-block;
+    width: 10px;
+}
+
+/* Claude Conversation Styles */
+.claude-prompt {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent-purple);
+    padding: 20px 20px 15px 20px;
+    margin: 30px auto 20px;
+    max-width: 100%;
+    border-radius: 0 6px 6px 0;
+    font-family: var(--font-family-base);
+    font-size: 0.9em;
+    position: relative;
+}
+
+.claude-prompt::before {
+    content: "Human";
+    position: absolute;
+    top: -18px;
+    left: 20px;
+    background: var(--bg-primary);
+    padding: 2px 12px;
+    color: var(--accent-purple);
+    font-size: 0.75em;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+.claude-response {
+    background: var(--bg-tertiary);
+    border-left: 3px solid var(--text-accent);
+    padding: 20px 20px 15px 20px;
+    margin: 30px auto 20px;
+    max-width: 100%;
+    border-radius: 0 6px 6px 0;
+    font-family: var(--font-family-base);
+    font-size: 0.9em;
+    position: relative;
+}
+
+.claude-response::before {
+    content: "Claude";
+    position: absolute;
+    top: -18px;
+    left: 20px;
+    background: var(--bg-primary);
+    padding: 2px 12px;
+    color: var(--text-accent);
+    font-size: 0.75em;
+    font-weight: 600;
+    border-radius: 4px;
+}
