@@ -11,7 +11,9 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     display: inline-block;
 }
-
+.claude-code-style {
+    color: #CF7D5B;
+}
 .claude-header-mini {
     background: #2a2a2a;
     border: 2px solid #CF7D5B;
@@ -33,7 +35,7 @@
 
 .claude-header-title {
     color: #d4d4d4;
-    font-size: 16px;
+    font-size: 0.7em;
     font-family: var(--font-family-mono);
     margin: 0;
     font-weight: 300;
@@ -42,7 +44,7 @@
 
 .claude-header-title-mini {
     color: #d4d4d4;
-    font-size: 14px;
+    font-size: 0.9em;
     font-family: var(--font-family-mono);
     margin: 0;
     font-weight: 300;
@@ -137,7 +139,7 @@
 
 .claude-ready-info {
     color: #8b949e;
-    font-size: 14px;
+    font-size: 0.85em;
     font-family: var(--font-family-mono);
     margin-bottom: 10px;
 }
@@ -175,6 +177,10 @@
     border: 1px solid #30363d;
     border-radius: 6px;
     padding: 10px 15px;
+}
+.claude-statusline {
+    padding: 5px 10px;
+    font-size: 0.85em;
 }
 
 .claude-prompt-symbol {

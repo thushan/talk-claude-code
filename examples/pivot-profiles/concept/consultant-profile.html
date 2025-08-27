@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pivot Profile • Markdown → HTML (Themeable)</title>
+  <!-- Tailwind (CDN for quick local testing) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Markdown + YAML parsers (CDN, no build step) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+  <style>
+    :root { --pp-accent:#0ea5e9; --pp-ink:#0f172a; --pp-soft:#f1f5f9; --pp-card:#ffffff; --pp-muted:#475569; }
+    .theme-sixpivot { --pp-accent:#111827; --pp-ink:#0b1220; --pp-soft:#f5f7fb; --pp-card:#ffffff; --pp-muted:#4b5563; }
+    .pp-card { background:var(--pp-card); border:1px solid #e5e7eb; border-radius:1rem; }
+    .pp-badge { display:inline-flex; align-items:center; gap:.375rem; border:1px solid #e2e8f0; padding:.25rem .5rem; border-radius:9999px; font-size:.75rem; color:var(--pp-muted); background:white }
+    .pp-badge--soft { background:var(--pp-soft); }
+    .pp-btn { display:inline-flex; align-items:center; gap:.5rem; border-radius:.75rem; padding:.5rem .9rem; border:1px solid #e2e8f0; background:white }
+    .pp-btn:hover{ background:#f8fafc }
+    .pp-btn--primary { background:var(--pp-accent); color:#fff; border-color:var(--pp-accent) }
+    .pp-kicker { letter-spacing:.1em; font-weight:600; font-size:.75rem; color:var(--pp-muted); text-transform:uppercase }
+    .pp-h1 { font-size:1.75rem; font-weight:700; color:var(--pp-ink) }
+    .pp-h2 { font-size:1rem; font-weight:600; color:var(--pp-ink) }
+    .pp-rule { height:1px; background:#e5e7eb }
+    .pp-watermark::after{ content:attr(data-watermark); position:fixed; inset:0; pointer-events:none; opacity:.06; font-weight:700; font-size:6rem; display:flex; align-items:center; justify-content:center; transform:rotate(-18deg); color:#0f172a }
+    .prose p { margin: .5rem 0 }
+    .prose ul { list-style: disc; padding-left: 1.25rem }
+    .prose li { margin: .25rem 0 }
+  </style>
+</head>
+<body class="min-h-screen bg-[var(--pp-soft)] text-[var(--pp-ink)]">
+  <div id="root" class="max-w-6xl mx-auto p-6 space-y-6">
+    <!-- Toolbar -->
+    <header class="flex items-center justify-between">
+      <div>
+        <div class="pp-kicker">Pivot Profiles</div>
+        <h1 class="pp-h1">Markdown → HTML Renderer</h1>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="themeToggle" class="pp-btn" title="Toggle theme">Toggle Theme</button>
+        <button id="downloadPdf" class="pp-btn">Export PDF (print)</button>
+        <button id="downloadDocx" class="pp-btn" title="Mock only">Export Word (mock)</button>
+      </div>
+    </header>
+
+    <!-- Two columns: profile + sidebar -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Left: Rendered profile -->
+      <main id="profileWrap" class="lg:col-span-2 pp-card p-6 relative overflow-hidden">
+        <div id="wm" class="hidden pp-watermark" data-watermark="SIXPIVOT • CONFIDENTIAL"></div>
+        <div class="flex items-start justify-between flex-wrap gap-2">
+          <div>
+            <div class="pp-kicker" id="role">Senior Consultant</div>
+            <div class="pp-h1" id="name">Thushan Fernando</div>
+          </div>
+          <div class="flex flex-wrap gap-2" id="industries"></div>
+        </div>
+        <div class="mt-3 text-[var(--pp-muted)] text-sm" id="summary"></div>
+        <div class="pp-rule my-4"></div>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <div class="pp-h2 mb-2">Technical Strengths</div>
+            <div class="flex flex-wrap gap-2" id="skills"></div>
+          </div>
+          <div>
+            <div class="pp-h2 mb-2">Education & Qualifications</div>
+            <ul id="education" class="text-sm space-y-2"></ul>
+          </div>
+        </section>
+
+        <div class="pp-rule my-4"></div>
+
+        <section>
+          <div class="pp-h2 mb-3">Employment History</div>
+          <ul id="employment" class="text-sm space-y-2"></ul>
+        </section>
+
+        <div class="pp-rule my-4"></div>
+
+        <section>
+          <div class="pp-h2 mb-3">Recent Projects</div>
+          <div id="projects" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+        </section>
+
+        <div class="pp-rule my-6"></div>
+
+        <section>
+          <div class="pp-h2 mb-2">Narrative</div>
+          <article id="mdOut" class="prose max-w-none text-[var(--pp-ink)]"></article>
+        </section>
+      </main>
+
+      <!-- Right: Controls -->
+      <aside class="pp-card p-6 space-y-4">
+        <div class="pp-h2">Controls</div>
+        <div class="space-y-3 text-sm">
+          <label class="flex items-center justify-between gap-3">
+            <span>Watermark</span>
+            <input id="toggleWM" type="checkbox" class="accent-black" checked />
+          </label>
+          <label class="flex items-center justify-between gap-3">
+            <span>Theme</span>
+            <select id="themeSel" class="border rounded-lg px-2 py-1">
+              <option value="classic">Classic</option>
+              <option value="sixpivot" selected>SixPivot</option>
+            </select>
+          </label>
+          <label class="block">Load Markdown
+            <textarea id="mdSrc" class="mt-1 w-full border rounded-lg p-2" rows="10"></textarea>
+          </label>
+          <button id="renderBtn" class="pp-btn pp-btn--primary w-full">Render</button>
+          <div class="text-xs text-[var(--pp-muted)]">Tip: paste your .md with YAML front‑matter above and hit Render.</div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="text-center text-xs text-[var(--pp-muted)]">Local demo • Paste Markdown and render • Use the browser's Print → Save as PDF for a quick PDF export</footer>
+  </div>
+
+  <!-- Sample Markdown (front‑matter + body) seeded from your uploaded profile -->
+  <script type="text/plain" id="sampleMD">---
+name: Thushan Fernando
+role: Senior Consultant
+summary: >-
+  Specialist software engineer since 2003, across embedded and full‑stack. Focus on LLM inference & finetuning, Search / IR, Text & Image Analytics, performance bottlenecks, and Cloud Architecture & DevOps across Azure & AWS.
+industries:
+  - Banking & Finance
+  - Defence
+  - Education
+  - Government
+  - Logistics
+  - Professional Services
+  - Utilities
+skills:
+  - Golang
+  - C# / .NET
+  - C/C++
+  - Rust
+  - Python
+  - ElasticSearch
+  - Docker
+  - Kubernetes
+  - Azure
+  - AWS
+  - Linux
+  - Postgres
+  - MySQL
+  - T-SQL
+education:
+  - { year: 2024, institution: RMIT, qualification: Bachelor of Engineering (Aerospace Engineering) }
+  - { year: 2020, institution: RMIT, qualification: Undergraduate Certificate in Space Science }
+  - { year: 2019, institution: RMIT, qualification: Master of Engineering (Electrical & Electronic Engineering) }
+  - { year: 2007, institution: Swinburne University, qualification: Computer Science & Software Engineering }
+employment:
+  - { company: SixPivot, role: Senior Consultant, from: Aug 2021, to: Present }
+  - { company: Readify Ltd, role: Principal Consultant, from: 2010, to: 2021 }
+  - { company: HSD Pty Ltd, role: Lead Architect, from: 2008, to: 2010 }
+  - { company: Vividas Ltd, role: Platform Lead / Senior Platform Lead, from: 2003, to: 2008 }
+  - { company: WebSoftware Systems, role: Director / Lead Developer, from: 1999, to: 2015 }
+  - { company: Innovasys Ltd (UK), role: Application Developer / Senior Developer, from: 1999, to: 2005 }
+projects:
+  - year: 2025
+    client: Spectur
+    detail: Modernising & migrating product suite from AWS to Azure (Java, Python).
+  - year: 2025
+    client: JB Hi‑Fi
+    detail: Integrated a new last‑mile carrier into consignments & back‑office systems.
+  - year: 2024
+    client: Mater
+    detail: AI for hospital use‑cases with Azure OpenAI + vector search; domain taxonomies.
+  - year: 2024
+    client: Charles Elena
+    detail: AWS Rekognition, Comprehend, SageMaker + Stable Diffusion; infra & CI/CD.
+---
+
+## Profile
+
+Thushan has worked across several customers to understand their challenges, optimise the way they approach solutions and provide overarching guidance to teams and organisations to succeed in their initiatives.
+
+## Notes
+
+- This section renders from Markdown body.
+- Use headings, lists, links, and emphasis.
+- Keep structured data in the YAML front‑matter.
+</script>
+
+  <script>
+    // Utility: parse front‑matter ("---" blocks) and body
+    function parseFrontMatter(src){
+      const fmStart = src.indexOf('---');
+      if (fmStart !== 0) return { data:{}, body:src };
+      const fmEnd = src.indexOf('\n---', 3);
+      if (fmEnd === -1) return { data:{}, body:src };
+      const yaml = src.slice(3, fmEnd).trim();
+      const body = src.slice(fmEnd + 4).trim();
+      let data = {};
+      try { data = jsyaml.load(yaml) || {}; } catch(e){ console.warn('YAML parse error', e); }
+      return { data, body };
+    }
+
+    function el(tag, cls, txt){ const n = document.createElement(tag); if(cls) n.className = cls; if(txt!=null) n.textContent = txt; return n; }
+
+    function renderProfile(data, body){
+      // Top header
+      document.getElementById('name').textContent = data.name || '';
+      document.getElementById('role').textContent = data.role || '';
+      document.getElementById('summary').textContent = data.summary || '';
+
+      // Industries badges
+      const indWrap = document.getElementById('industries'); indWrap.innerHTML = '';
+      (data.industries||[]).forEach(i=> indWrap.appendChild(el('span','pp-badge pp-badge--soft',i)) );
+
+      // Skills
+      const skillWrap = document.getElementById('skills'); skillWrap.innerHTML = '';
+      (data.skills||[]).forEach(s=> skillWrap.appendChild(el('span','pp-badge',s)) );
+
+      // Education
+      const edu = document.getElementById('education'); edu.innerHTML = '';
+      (data.education||[]).forEach(e=>{
+        const li = el('li');
+        li.innerHTML = `<strong>${e.year}</strong> • ${e.institution} — ${e.qualification}`;
+        edu.appendChild(li);
+      });
+
+      // Employment
+      const emp = document.getElementById('employment'); emp.innerHTML = '';
+      ;(data.employment||[]).forEach(e=>{
+        const li = el('li');
+        li.innerHTML = `<strong>${e.company}</strong> — ${e.role} <span class="text-[var(--pp-muted)]">(${e.from}–${e.to})</span>`;
+        emp.appendChild(li);
+      });
+
+      // Projects
+      const proj = document.getElementById('projects'); proj.innerHTML = '';
+      ;(data.projects||[]).forEach(p=>{
+        const card = el('div','pp-card p-3');
+        card.innerHTML = `<div class="flex items-center justify-between"><div class="font-medium">${p.client}</div><span class="pp-badge">${p.year}</span></div><p class="text-sm text-[var(--pp-muted)] mt-1">${p.detail}</p>`
+        proj.appendChild(card);
+      });
+
+      // Markdown body → HTML
+      document.getElementById('mdOut').innerHTML = marked.parse(body || '');
+    }
+
+    function applyTheme(name){
+      const root = document.documentElement;
+      if(name === 'sixpivot') root.classList.add('theme-sixpivot'); else root.classList.remove('theme-sixpivot');
+      document.getElementById('themeSel').value = name;
+    }
+
+    // Wire up controls
+    const mdSrc = document.getElementById('mdSrc');
+    const sample = document.getElementById('sampleMD').textContent;
+    mdSrc.value = sample; // preload
+
+    function doRender(){ const {data, body} = parseFrontMatter(mdSrc.value); renderProfile(data, body); }
+
+    document.getElementById('renderBtn').addEventListener('click', doRender);
+    document.getElementById('themeToggle').addEventListener('click', ()=>{
+      const now = document.documentElement.classList.contains('theme-sixpivot') ? 'classic' : 'sixpivot';
+      applyTheme(now);
+    });
+    document.getElementById('themeSel').addEventListener('change', (e)=> applyTheme(e.target.value));
+
+    document.getElementById('toggleWM').addEventListener('change', (e)=>{
+      document.getElementById('wm').classList.toggle('hidden', !e.target.checked);
+    });
+
+    // Mock exports
+    document.getElementById('downloadPdf').addEventListener('click', ()=>{
+      window.print();
+    });
+    document.getElementById('downloadDocx').addEventListener('click', ()=>{
+      alert('This is a mock in the static demo. In the real app, this would call a service that renders Word from your Markdown/YAML via a template.');
+    });
+
+    // Initial paint
+    applyTheme('sixpivot');
+    doRender();
+  </script>
+</body>
+</html>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultant Profile - Thushan Fernando</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <style>
+        :root {
+            --sp-ink: #111827;
+            --sp-muted: #475569;
+            --sp-bg: #f5f7fb;
+            --sp-card: #ffffff;
+            --sp-border: #e5e7eb;
+            --sp-accent: #0ea5e9;
+            --sp-badge-bg: #e0f2fe;
+        }
+
+        [data-theme="dark"] {
+            --sp-ink: #f3f4f6;
+            --sp-muted: #94a3b8;
+            --sp-bg: #1e293b;
+            --sp-card: #293145;
+            --sp-border: #475569;
+            --sp-accent: #38bdf8;
+            --sp-badge-bg: #075985;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--sp-bg);
+            color: var(--sp-ink);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            gap: 24px;
+            padding: 24px;
+        }
+
+        .sidebar {
+            width: 300px;
+            flex-shrink: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: calc(100% - 324px);
+        }
+
+        .card {
+            background: var(--sp-card);
+            border: 1px solid var(--sp-border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-small {
+            padding: 16px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--sp-ink);
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--sp-ink);
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--sp-ink);
+        }
+
+        p {
+            font-size: 18px;
+            color: var(--sp-muted);
+            margin-bottom: 16px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--sp-muted);
+            margin-bottom: 16px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--sp-badge-bg);
+            color: var(--sp-ink);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin: 2px 4px 2px 0;
+        }
+
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            background: var(--sp-accent);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-right: 12px;
+            margin-bottom: 8px;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn:focus {
+            outline: 2px solid var(--sp-accent);
+            outline-offset: 2px;
+        }
+
+        .btn-secondary {
+            background: var(--sp-card);
+            color: var(--sp-ink);
+            border: 1px solid var(--sp-border);
+        }
+
+        .toggle-group {
+            margin-bottom: 24px;
+        }
+
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--sp-border);
+        }
+
+        .toggle-item:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: var(--sp-border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--sp-accent);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(20px);
+        }
+
+        .expires-banner {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        [data-theme="dark"] .expires-banner {
+            background: #451a03;
+            color: #fbbf24;
+        }
+
+        .employment-item, .education-item, .project-item {
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--sp-border);
+        }
+
+        .employment-item:last-child,
+        .education-item:last-child,
+        .project-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .date-range {
+            font-size: 14px;
+            color: var(--sp-accent);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .company, .institution, .client {
+            font-weight: 600;
+            color: var(--sp-ink);
+            margin-bottom: 4px;
+        }
+
+        .role, .qualification {
+            color: var(--sp-muted);
+            margin-bottom: 8px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 1000;
+        }
+
+        .activity-panel {
+            background: var(--sp-card);
+            border: 1px solid var(--sp-border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--sp-border);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-count {
+            font-weight: 600;
+            color: var(--sp-accent);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--sp-muted);
+            font-size: 14px;
+            border-top: 1px solid var(--sp-border);
+            margin-top: 48px;
+        }
+
+        .section {
+            transition: all 0.3s ease;
+        }
+
+        .section.hidden {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                padding: 16px;
+            }
+
+            .sidebar {
+                width: 100%;
+                order: 2;
+            }
+
+            .main-content {
+                max-width: 100%;
+                order: 1;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .sidebar,
+            .theme-toggle,
+            .expires-banner,
+            .btn {
+                display: none !important;
+            }
+
+            .container {
+                flex-direction: column;
+                padding: 0;
+            }
+
+            .main-content {
+                max-width: 100%;
+            }
+
+            .card {
+                border: none;
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+
+            .section {
+                display: block !important;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        .toggle-switch:focus,
+        .btn:focus {
+            outline: 2px solid var(--sp-accent);
+            outline-offset: 2px;
+        }
+
+        /* Screen reader only text */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <button class="btn theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        🌙
+    </button>
+
+    <div class="container">
+        <aside class="sidebar" role="complementary">
+            <div class="card card-small">
+                <h3>View Controls</h3>
+                <div class="toggle-group" role="group" aria-label="Section visibility controls">
+                    <div class="toggle-item">
+                        <label for="toggle-summary">Summary</label>
+                        <div class="toggle-switch active" id="toggle-summary" onclick="toggleSection('summary')" 
+                             role="switch" aria-checked="true" tabindex="0" 
+                             onkeydown="handleToggleKeydown(event, 'summary')"></div>
+                    </div>
+                    <div class="toggle-item">
+                        <label for="toggle-skills">Skills</label>
+                        <div class="toggle-switch active" id="toggle-skills" onclick="toggleSection('skills')" 
+                             role="switch" aria-checked="true" tabindex="0"
+                             onkeydown="handleToggleKeydown(event, 'skills')"></div>
+                    </div>
+                    <div class="toggle-item">
+                        <label for="toggle-projects">Projects</label>
+                        <div class="toggle-switch active" id="toggle-projects" onclick="toggleSection('projects')" 
+                             role="switch" aria-checked="true" tabindex="0"
+                             onkeydown="handleToggleKeydown(event, 'projects')"></div>
+                    </div>
+                    <div class="toggle-item">
+                        <label for="toggle-employment">Employment</label>
+                        <div class="toggle-switch active" id="toggle-employment" onclick="toggleSection('employment')" 
+                             role="switch" aria-checked="true" tabindex="0"
+                             onkeydown="handleToggleKeydown(event, 'employment')"></div>
+                    </div>
+                    <div class="toggle-item">
+                        <label for="toggle-education">Education</label>
+                        <div class="toggle-switch active" id="toggle-education" onclick="toggleSection('education')" 
+                             role="switch" aria-checked="true" tabindex="0"
+                             onkeydown="handleToggleKeydown(event, 'education')"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-panel">
+                <h3>Activity</h3>
+                <div class="activity-item">
+                    <span>Views</span>
+                    <span class="activity-count" id="views-count">1</span>
+                </div>
+                <div class="activity-item">
+                    <span>Summary Reads</span>
+                    <span class="activity-count" id="summary-reads">0</span>
+                </div>
+                <div class="activity-item">
+                    <span>Skills Reads</span>
+                    <span class="activity-count" id="skills-reads">0</span>
+                </div>
+                <div class="activity-item">
+                    <span>Projects Reads</span>
+                    <span class="activity-count" id="projects-reads">0</span>
+                </div>
+                <div class="activity-item">
+                    <span>Employment Reads</span>
+                    <span class="activity-count" id="employment-reads">0</span>
+                </div>
+                <div class="activity-item">
+                    <span>Education Reads</span>
+                    <span class="activity-count" id="education-reads">0</span>
+                </div>
+                <div class="activity-item">
+                    <span>Downloads</span>
+                    <span class="activity-count" id="downloads-count">0</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content" role="main">
+            <div class="expires-banner">
+                ⏰ This profile expires in 14 days
+            </div>
+
+            <div class="card">
+                <button class="btn" onclick="downloadPDF()" aria-label="Download profile as PDF">
+                    📄 Download PDF
+                </button>
+                <button class="btn btn-secondary" onclick="downloadDOCX()" aria-label="Download profile as DOCX">
+                    📝 Download DOCX
+                </button>
+            </div>
+
+            <div id="profile-content">
+                <!-- Profile content will be rendered here -->
+            </div>
+
+            <div class="footer">
+                Confidential viewer; usage is logged.
+            </div>
+        </main>
+    </div>
+
+    <script id="yaml" type="text/yaml">
+name: Thushan Fernando
+title: Senior Consultant
+specialisations:
+  - LLM inference & finetuning
+  - Search (relevance) / Information Retrieval
+  - Text & Image Analytics
+  - Machine Learning
+  - Performance bottleneck analysis
+  - Cloud Architecture (Azure & AWS)
+  - DevOps & migration (DC to Cloud)
+technical_strengths:
+  languages_tools:
+    - C#
+    - C/C++
+    - Rust
+    - Golang
+    - Zig
+    - Node
+    - Python
+    - .NET Core
+    - T-SQL
+    - Postgres
+    - MySQL
+    - ElasticSearch
+    - Docker
+    - Kubernetes
+    - Linux
+    - Win32
+    - RabbitMQ
+    - Unix
+    - Azure
+    - AWS
+    - Git
+    - Github/Bitbucket
+    - Octopus Deploy
+    - Confluence
+    - Jira
+    - Azure DevOps
+  methodologies:
+    - Agile
+    - Scrum
+    - Lean
+    - Product Owner
+    - Scrum Master
+    - Mind Mapping
+    - Design Sprints
+    - Prototyping
+  industries:
+    - Banking & Finance
+    - Defence
+    - Education
+    - Government
+    - Logistics
+    - Professional Services
+    - Utilities
+education:
+  - year: 2024
+    institution: RMIT
+    qualification: Bachelor of Engineering (Aerospace Engineering)
+  - year: 2020
+    institution: RMIT
+    qualification: Undergraduate Certificate in Space Science
+  - year: 2019
+    institution: RMIT
+    qualification: Master of Engineering (Electrical & Electronic Engineering)
+  - year: 2007
+    institution: Swinburne University
+    qualification: Computer Science & Software Engineering
+employment_history:
+  - company: SixPivot
+    from: Aug 2021
+    to: Present
+    role: Senior Consultant
+  - company: Readify Ltd
+    from: 2010
+    to: 2021
+    role: Principal Consultant
+  - company: HSD Pty Ltd
+    from: 2008
+    to: 2010
+    role: Lead Architect
+  - company: Vividas Ltd
+    from: 2003
+    to: 2008
+    role: Platform Lead / Senior Platform Lead
+  - company: WebSoftware Systems
+    from: 1999
+    to: 2015
+    role: Director / Lead Developer
+  - company: Innovasys Ltd (UK)
+    from: 1999
+    to: 2005
+    role: Application Developer / Senior Developer
+profile: |
+  A specialist software engineer who's been in the industry since 2003 working across a broad range of languages and platforms including embedded development. Specialising in LLMs - inference and finetuning, Search (relevance) / Information Retrieval, Text & Image Analytics and machine learning as well as finding performance bottlenecks, memory leaks across Windows and Linux platforms, Cloud Architecture and DevOps practices across Azure & AWS including helping customers migrate from DC to Cloud.
+
+  Thushan has worked across several customers to understand their challenges, optimise the way they approach solutions and provide overarching guidance to teams and organisations to succeed in their initiatives.
+recent_projects:
+  - year: 2025
+    client: Spectur
+    description: Modernising and migration of Spectur's product suite from AWS to Azure, primarily Java, Python.
+  - year: 2025
+    client: JB HiFi
+    description: Development of integrating and implementing JB's new last-mile carrier into their Consignments & back-office systems.
+  - year: 2024
+    client: Mater
+    description: Exploring the use of AI for hospital use-cases at Mater, with a particular focus on coding effectiveness using Azure's AI Stack - Azure OpenAI (with Grounding and vector search) and creating taxonomies and ontologies for Mater's domain.
+  - year: 2024
+    client: Charles Elena
+    description: Worked with the Charles Elena team to help build and develop their Rafaforever and International Womens Day applications built with AI services provided by AWS. Combination of Rekogniton, Comprehend, SageMaker and complex models running on HuggingFace for Stable Diffusion. Built their core AWS Infrastructure, Backend serverless and CI/CD pipelines.
+    </script>
+
+    <script>
+        let analytics = {
+            views: 1,
+            sectionReads: {
+                summary: 0,
+                skills: 0,
+                projects: 0,
+                employment: 0,
+                education: 0
+            },
+            downloads: 0
+        };
+
+        let sectionVisibility = {
+            summary: true,
+            skills: true,
+            projects: true,
+            employment: true,
+            education: true
+        };
+
+        let observedSections = new Set();
+        let sectionTimers = {};
+
+        function parseYAML() {
+            const yamlScript = document.getElementById('yaml');
+            const yamlContent = yamlScript.textContent;
+            return jsyaml.load(yamlContent);
+        }
+
+        function renderProfile(data) {
+            const content = document.getElementById('profile-content');
+            
+            let html = `
+                <div class="card">
+                    <h1>${data.name}</h1>
+                    <div class="subtitle">${data.title}</div>
+                    <div class="badge-grid">
+                        ${data.technical_strengths.industries.map(industry => 
+                            `<span class="badge">${industry}</span>`
+                        ).join('')}
+                    </div>
+                </div>
+
+                <div class="section" id="summary-section">
+                    <div class="card">
+                        <h2>Profile Summary</h2>
+                        <p>${data.profile}</p>
+                    </div>
+                </div>
+
+                <div class="section" id="skills-section">
+                    <div class="card">
+                        <h2>Technical Skills</h2>
+                        <h3>Languages & Tools</h3>
+                        <div class="badge-grid">
+                            ${data.technical_strengths.languages_tools.map(skill => 
+                                `<span class="badge">${skill}</span>`
+                            ).join('')}
+                        </div>
+                        <h3>Methodologies</h3>
+                        <div class="badge-grid">
+                            ${data.technical_strengths.methodologies.map(method => 
+                                `<span class="badge">${method}</span>`
+                            ).join('')}
+                        </div>
+                        <h3>Specialisations</h3>
+                        <div class="badge-grid">
+                            ${data.specialisations.map(spec => 
+                                `<span class="badge">${spec}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section" id="projects-section">
+                    <div class="card">
+                        <h2>Recent Projects</h2>
+                        ${data.recent_projects.map(project => `
+                            <div class="project-item">
+                                <div class="date-range">${project.year}</div>
+                                <div class="client">${project.client}</div>
+                                <div class="role">${project.description}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="section" id="employment-section">
+                    <div class="card">
+                        <h2>Employment History</h2>
+                        ${data.employment_history.map(job => `
+                            <div class="employment-item">
+                                <div class="date-range">${job.from} - ${job.to}</div>
+                                <div class="company">${job.company}</div>
+                                <div class="role">${job.role}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="section" id="education-section">
+                    <div class="card">
+                        <h2>Education</h2>
+                        ${data.education.map(edu => `
+                            <div class="education-item">
+                                <div class="date-range">${edu.year}</div>
+                                <div class="institution">${edu.institution}</div>
+                                <div class="qualification">${edu.qualification}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            content.innerHTML = html;
+            setupIntersectionObserver();
+        }
+
+        function setupIntersectionObserver() {
+            const options = {
+                threshold: 0.6,
+                rootMargin: '0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const sectionId = entry.target.id.replace('-section', '');
+                    
+                    if (entry.isIntersecting) {
+                        if (!sectionTimers[sectionId]) {
+                            sectionTimers[sectionId] = setTimeout(() => {
+                                if (!observedSections.has(sectionId)) {
+                                    analytics.sectionReads[sectionId]++;
+                                    observedSections.add(sectionId);
+                                    updateAnalyticsDisplay();
+                                }
+                            }, 2000);
+                        }
+                    } else {
+                        if (sectionTimers[sectionId]) {
+                            clearTimeout(sectionTimers[sectionId]);
+                            sectionTimers[sectionId] = null;
+                        }
+                    }
+                });
+            }, options);
+
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+        function toggleSection(sectionName) {
+            sectionVisibility[sectionName] = !sectionVisibility[sectionName];
+            const section = document.getElementById(`${sectionName}-section`);
+            const toggle = document.getElementById(`toggle-${sectionName}`);
+            
+            if (sectionVisibility[sectionName]) {
+                section.classList.remove('hidden');
+                toggle.classList.add('active');
+                toggle.setAttribute('aria-checked', 'true');
+            } else {
+                section.classList.add('hidden');
+                toggle.classList.remove('active');
+                toggle.setAttribute('aria-checked', 'false');
+            }
+        }
+
+        function handleToggleKeydown(event, sectionName) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                toggleSection(sectionName);
+            }
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            
+            const themeButton = document.querySelector('.theme-toggle');
+            themeButton.textContent = newTheme === 'light' ? '🌙' : '☀️';
+        }
+
+        function downloadPDF() {
+            analytics.downloads++;
+            updateAnalyticsDisplay();
+            alert('Download PDF');
+        }
+
+        function downloadDOCX() {
+            analytics.downloads++;
+            updateAnalyticsDisplay();
+            alert('Download DOCX');
+        }
+
+        function updateAnalyticsDisplay() {
+            document.getElementById('views-count').textContent = analytics.views;
+            document.getElementById('summary-reads').textContent = analytics.sectionReads.summary;
+            document.getElementById('skills-reads').textContent = analytics.sectionReads.skills;
+            document.getElementById('projects-reads').textContent = analytics.sectionReads.projects;
+            document.getElementById('employment-reads').textContent = analytics.sectionReads.employment;
+            document.getElementById('education-reads').textContent = analytics.sectionReads.education;
+            document.getElementById('downloads-count').textContent = analytics.downloads;
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileData = parseYAML();
+            renderProfile(profileData);
+            updateAnalyticsDisplay();
+        });
+    </script>
+</body>
+</html>

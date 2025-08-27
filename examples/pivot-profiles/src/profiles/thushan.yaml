@@ -1,0 +1,117 @@
+---
+name: Thushan Fernando
+title: Senior Consultant
+specialisations:
+  - LLM inference & finetuning
+  - Search (relevance) / Information Retrieval
+  - Text & Image Analytics
+  - Machine Learning
+  - Performance bottleneck analysis
+  - Cloud Architecture (Azure & AWS)
+  - DevOps & migration (DC to Cloud)
+technical_strengths:
+  languages_tools:
+    - C#
+    - C/C++
+    - Rust
+    - Golang
+    - Zig
+    - Node
+    - Python
+    - .NET Core
+    - T-SQL
+    - Postgres
+    - MySQL
+    - ElasticSearch
+    - Docker
+    - Kubernetes
+    - Linux
+    - Win32
+    - RabbitMQ
+    - Unix
+    - Azure
+    - AWS
+    - Git
+    - Github/Bitbucket
+    - Octopus Deploy
+    - Confluence
+    - Jira
+    - Azure DevOps
+  methodologies:
+    - Agile
+    - Scrum
+    - Lean
+    - Product Owner
+    - Scrum Master
+    - Mind Mapping
+    - Design Sprints
+    - Prototyping
+  industries:
+    - Banking & Finance
+    - Defence
+    - Education
+    - Government
+    - Logistics
+    - Professional Services
+    - Utilities
+education:
+  - year: 2024
+    institution: RMIT
+    qualification: Bachelor of Engineering (Aerospace Engineering)
+  - year: 2020
+    institution: RMIT
+    qualification: Undergraduate Certificate in Space Science
+  - year: 2019
+    institution: RMIT
+    qualification: Master of Engineering (Electrical & Electronic Engineering)
+  - year: 2007
+    institution: Swinburne University
+    qualification: Computer Science & Software Engineering
+employment_history:
+  - company: SixPivot
+    from: Aug 2021
+    to: Present
+    role: Senior Consultant
+  - company: Readify Ltd
+    from: 2010
+    to: 2021
+    role: Principal Consultant
+  - company: HSD Pty Ltd
+    from: 2008
+    to: 2010
+    role: Lead Architect
+  - company: Vividas Ltd
+    from: 2003
+    to: 2008
+    role: Platform Lead / Senior Platform Lead
+  - company: WebSoftware Systems
+    from: 1999
+    to: 2015
+    role: Director / Lead Developer
+  - company: Innovasys Ltd (UK)
+    from: 1999
+    to: 2005
+    role: Application Developer / Senior Developer
+---
+## Profile
+
+A specialist software engineer who's been in the industry since 2003 working across a broad range of languages and platforms including embedded development. Specialising in LLMs - inference and finetuning, Search (relevance) / Information Retrieval, Text & Image Analytics and machine learning as well as finding performance bottlenecks, memory leaks across Windows and Linux platforms, Cloud Architecture and DevOps practices across Azure & AWS including helping customers migrate from DC to Cloud.
+
+Thushan has worked across several customers to understand their challenges, optimise the way they approach solutions and provide overarching guidance to teams and organisations to succeed in their initiatives.
+
+---
+
+## Recent Projects
+
+### 2025 | Spectur
+Modernising and migration of Spectur's product suite from AWS to Azure, primarily Java, Python.
+
+### 2025 | JB HiFi
+Development of integrating and implementing JB's new last-mile carrier into their Consignments & back-office systems.
+
+### 2024 | Mater
+Exploring the use of AI for hospital use-cases at Mater, with a particular focus on coding effectiveness using Azure's AI Stack - Azure OpenAI (with Grounding and vector search) and creating taxonomies and ontologies for Mater's domain.
+
+### 2024 | Charles Elena
+Worked with the Charles Elena team to help build and develop their Rafaforever and International Womens Day applications built with AI services provided by AWS. Combination of Rekogniton, Comprehend, SageMaker and complex models running on HuggingFace for Stable Diffusion. Built their core AWS Infrastructure, Backend serverless and CI/CD pipelines.
+

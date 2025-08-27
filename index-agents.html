@@ -1,0 +1,1411 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="description" content="Claude Code - Building with Agents">
+	<meta name="author" content="Thushan Fernando">
+
+	<title>Claude Code Agents (2025)</title>
+
+	<link rel="stylesheet" href="engine/reset.css">
+	<link rel="stylesheet" href="engine/reveal.css">
+	<link rel="stylesheet" href="engine/theme/modern-dark.css" id="theme">
+	<link rel="stylesheet" href="engine/modern.css">
+	<link rel="stylesheet" href="engine/thushan.css">
+	<link rel="stylesheet" href="engine/claude.css">
+	<link rel="stylesheet" href="engine/plugin/highlight/claude-dark.css" id="highlight-theme">
+	<style>
+		/* Presentation-specific styles */
+		.author-header {
+			background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+			border: 1px solid #444;
+			border-radius: 12px;
+			padding: 20px 30px;
+			margin: 20px auto 60px;
+			max-width: fit-content;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+			display: inline-block;
+			position: relative;
+			overflow: hidden;
+		}
+		
+		.author-header::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 2px;
+			background: linear-gradient(90deg, transparent, #CF7D5B, transparent);
+			opacity: 0.5;
+		}
+		
+		.author-header-content {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+		}
+		
+		.author-info {
+			text-align: left;
+		}
+		
+		.author-header-title {
+			color: #e0e0e0;
+			font-size: 18px;
+			font-family: var(--font-family-base);
+			margin: 0 0 8px 0;
+			font-weight: 500;
+			letter-spacing: 0.5px;
+		}
+		
+		.author-header-github {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			color: #a0a0a0;
+			font-size: 14px;
+			font-family: var(--font-family-mono);
+			margin: 0;
+			font-weight: 400;
+		}
+		
+		.author-header-github a {
+			color: var(--text-accent);
+			text-decoration: none;
+			transition: color var(--transition-fast);
+		}
+		
+		.author-header-github a:hover {
+			color: var(--text-highlight);
+			text-decoration: underline;
+		}
+		
+		.github-icon {
+			width: 20px;
+			height: 20px;
+			fill: #a0a0a0;
+			transition: fill var(--transition-fast);
+		}
+		
+		.author-header-github:hover .github-icon {
+			fill: var(--text-accent);
+		}
+		
+		.author-avatar {
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+			border: 2px solid #444;
+			background: #1a1a1a;
+			background-image: url('https://media.licdn.com/dms/image/v2/D5603AQGJzlomNE5kqA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1676539323661?e=2147483647&v=beta&t=TdEGZPzzTDvbeMELBWdQYz4Zmv65yZOOMHV0DN4k2-o');
+			background-size: cover;
+			background-position: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 24px;
+			color: var(--text-accent);
+			font-weight: 600;
+		}
+		.reveal .title-slide img {
+			max-width: 500px;
+			margin: 0 auto;
+			display: block;
+		}
+		
+		.reveal .title-slide {
+			text-align: center;
+			padding-top: 50px;
+		}
+
+		/* Claude Context Usage Display */
+		.context-usage-display {
+			font-family: var(--font-family-mono);
+			margin: 10px 0;
+		}
+
+		.context-command-line {
+			margin-bottom: 12px;
+		}
+
+		/* Main context layout - side by side */
+		.context-main {
+			display: flex;
+			gap: 30px;
+			margin: 16px 0;
+		}
+
+		.context-left {
+			flex-shrink: 0;
+		}
+
+		.context-right {
+			flex: 1;
+		}
+
+		.context-legend {
+			color: #a0a0a0;
+			font-family: var(--font-family-mono);
+			margin-bottom: 8px;
+			font-size: 14px;
+		}
+
+		.context-blocks-visual {
+			font-family: var(--font-family-mono);
+			line-height: 1.2;
+			font-size: 1.3em;
+		}
+
+		.block {
+			margin-right: 1px;
+		}
+
+		.block.system {
+			color: #a855f7; /* Purple */
+		}
+
+		.block.tools {
+			color: #22c55e; /* Green */
+		}
+
+		.block.mcp {
+			color: #06b6d4; /* Cyan */
+		}
+
+		.block.memory {
+			color: #ef4444; /* Red */
+		}
+
+		.block.messages {
+			color: #f97316; /* Orange */
+		}
+
+		.block.free {
+			color: #6b7280; /* Gray */
+			font-size: 1.16em;
+		}
+
+		.context-stats {
+			margin-top: 0;
+		}
+
+		.context-header-line {
+			margin-bottom: 4px;
+		}
+
+		.context-title {
+			color: #e8e8e8;
+			font-weight: 600;
+			font-size: 20px;
+		}
+
+		.context-subtitle {
+			color: #a0a0a0;
+			font-size: 16px;
+			margin-bottom: 12px;
+		}
+
+		.context-breakdown {
+			display: flex;
+			flex-direction: column;
+			gap: 2px;
+		}
+
+		.stat-line {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 16px;
+		}
+
+		.stat-icon {
+			font-family: var(--font-family-mono);
+			font-size: 1.2em;
+		}
+
+		.stat-icon.system {
+			color: #7c3aed;
+		}
+
+		.stat-icon.tools {
+			color: #059669;
+		}
+
+		.stat-icon.mcp {
+			color: #0891b2;
+		}
+
+		.stat-icon.memory {
+			color: #dc2626;
+		}
+
+		.stat-icon.messages {
+			color: #ea580c;
+		}
+
+		.stat-icon.free {
+			color: #4b5563;
+		}
+
+		.stat-label {
+			color: #a0a0a0;
+			min-width: 120px;
+		}
+
+		.stat-value {
+			color: #e8e8e8;
+			font-weight: 500;
+		}
+
+		/* Context Details Sections */
+		.context-details {
+			margin-top: 24px;
+		}
+
+		.mcp-tools-section,
+		.memory-files-section {
+			margin-bottom: 16px;
+		}
+
+		.section-header {
+			margin-bottom: 8px;
+		}
+
+		.section-title {
+			color: #e8e8e8;
+			font-weight: 600;
+			font-size: 18px;
+		}
+
+		.section-command {
+			color: #0891b2;
+			font-size: 16px;
+			margin-left: 4px;
+		}
+
+		.tools-list,
+		.memory-list {
+			margin-left: 5px;
+		}
+
+		.tool-item,
+		.memory-item {
+			font-size: 15px;
+			line-height: 1.4;
+			font-family: var(--font-family-mono);
+			margin: 2px 0;
+		}
+
+		.tool-item {
+			color: #e8e8e8; /* White text for tool names */
+		}
+
+		.tool-item .token-count {
+			color: #6b7280; /* Gray for token counts */
+		}
+
+		.memory-item {
+			color: #a0a0a0;
+		}
+
+		/* Terminal height utility classes */
+		.terminal-full-height .terminal-content {
+			max-height: calc(100vh - 350px);
+			min-height: calc(100vh - 350px);
+		}
+
+		.terminal-extra-tall .terminal-content {
+			max-height: calc(100vh - 300px);
+			min-height: 400px;
+		}
+
+		.terminal-max-content .terminal-content {
+			max-height: none;
+			height: auto;
+		}
+
+		/* Claude Image Paste Interface */
+		.claude-image-paste-interface {
+			position: relative;
+			height: 300px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.paste-prompt {
+			margin-top: 20px;
+			margin-bottom: 30px;
+		}
+
+		.paste-status-bar {
+			position: absolute;
+			bottom: 15px;
+			left: 20px;
+			right: 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.paste-instruction {
+			color: #ff6b6b;
+			font-family: var(--font-family-mono);
+			font-size: 16px;
+			margin: 0;
+		}
+
+		.shortcut-hint {
+			color: #8b949e;
+			font-size: 14px;
+		}
+
+		.context-text {
+			color: #f0f6fc;
+			font-family: var(--font-family-mono);
+			font-size: 16px;
+		}
+
+		/* Image sizing utility classes */
+		.image-auto-size {
+			max-width: 90vw;
+			max-height: 70vh;
+			width: auto;
+			height: auto;
+			object-fit: contain;
+		}
+
+		.image-full-width {
+			width: 100%;
+			max-width: none;
+			height: auto;
+		}
+
+		.image-large {
+			max-width: 85vw;
+			max-height: 75vh;
+			width: auto;
+			height: auto;
+			object-fit: contain;
+		}
+
+		.image-extra-large {
+			max-width: 95vw;
+			max-height: 80vh;
+			width: auto;
+			height: auto;
+			object-fit: contain;
+		}
+
+		/* Pivot Profiles section styling */
+		.pivot-section h3 {
+			color: var(--text-accent);
+			border-bottom: 2px solid var(--text-accent);
+			padding-bottom: 10px;
+			margin-bottom: 30px;
+		}
+
+		.pivot-section .problem-item {
+			background: rgba(239, 68, 68, 0.1);
+			border-left: 4px solid #ef4444;
+			padding: 15px 20px;
+			margin: 15px 0;
+			border-radius: 0 6px 6px 0;
+		}
+
+		.pivot-section .solution-item {
+			background: rgba(34, 197, 94, 0.1);
+			border-left: 4px solid #22c55e;
+			padding: 15px 20px;
+			margin: 15px 0;
+			border-radius: 0 6px 6px 0;
+		}
+
+		.pivot-section .feature-item {
+			background: rgba(59, 130, 246, 0.1);
+			border-left: 4px solid #3b82f6;
+			padding: 15px 20px;
+			margin: 15px 0;
+			border-radius: 0 6px 6px 0;
+		}
+
+		.pivot-section .vision-item {
+			background: rgba(168, 85, 247, 0.1);
+			border-left: 4px solid #a855f7;
+			padding: 15px 20px;
+			margin: 15px 0;
+			border-radius: 0 6px 6px 0;
+		}
+
+		.pivot-section li {
+			list-style: none;
+			font-size: 1.1em;
+			line-height: 1.4;
+		}
+
+		.pivot-section ul {
+			margin: 0;
+			padding: 0;
+		}
+
+		.pivot-overview {
+			background: var(--bg-tertiary);
+			border: 1px solid var(--border-color);
+			border-radius: 8px;
+			padding: 30px;
+			margin: 20px 0;
+			text-align: center;
+		}
+		.pivot-draw {
+			background: var(--bg-tertiary);
+			border: 1px dotted var(--text-highlight);
+			border-radius: 8px;
+			padding: 30px;
+			margin: 20px 0;
+			text-align: center;
+		}
+
+		/* Status line color styling */
+		.statusline-model {
+			color: #4fc3f7; /* Cyan for model name */
+		}
+
+		.statusline-branch {
+			color: #A2807F; /* Cyan for branch */
+		}
+
+		.statusline-changes {
+			color: #ffb74d; /* Orange/yellow for git changes */
+		}
+
+		.statusline-pipe {
+			color: #8b949e; /* Gray for separators */
+		}
+
+		/* Claude Model Selection Interface - Terminal Style */
+		.claude-model-select {
+			background: transparent;
+			padding: 20px;
+			margin: 16px 0;
+			font-family: var(--font-family-mono);
+			font-size: 14px;
+			border: 1px solid #959DD2;
+			border-radius: 10px;
+		}
+
+		.model-select-header {
+			color: #e6edf3;
+			margin-bottom: 6px;
+		}
+
+		.model-select-title {
+			color: #e6edf3;
+			font-size: 16px;
+			font-weight: normal;
+		}
+
+		.model-select-subtitle {
+			color: #8b949e;
+			font-size: 15px;
+			line-height: 1.3;
+			margin-bottom: 12px;
+		}
+
+		.model-options {
+			display: flex;
+			flex-direction: column;
+			gap: 1px;
+		}
+
+		.model-option {
+			display: flex;
+			align-items: flex-start;
+			padding: 2px 0;
+			font-size: 16px;
+			line-height: 1.4;
+		}
+
+		.model-option.selected {
+			color: #e6edf3;
+		}
+
+		.model-number {
+			color: #8b949e;
+			margin-right: 4px;
+			min-width: 16px;
+		}
+
+		.model-option.selected .model-number {
+			color: #22c55e;
+		}
+
+		.model-name {
+			color: #8b949e;
+			margin-right: 20px;
+			min-width: 140px;
+		}
+
+		.model-option.selected .model-name {
+			color: #22c55e;
+		}
+
+		.model-desc {
+			color: #8b949e;
+			font-size: 14px;
+			flex: 1;
+		}
+
+		.model-option.selected .model-desc {
+			color: #e6edf3;
+		}
+
+		.model-indicator {
+			color: #22c55e;
+			margin-left: 8px;
+		}
+
+		/* Strategy cards for workflow slides */
+		.strategy-card {
+			background: var(--bg-secondary);
+			border: 1px solid var(--border-color);
+			border-radius: 8px;
+			padding: 30px;
+			margin: 20px 0;
+		}
+
+		.strategy-card ul {
+			font-size: 1.1em;
+			line-height: 1.6;
+		}
+
+		.strategy-card li {
+			margin: 12px 0;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- Title Slide -->
+			<section class="title-slide">
+				<img src="assets/img/claude-code.png" alt="Claude Code Header" class="boring center">
+				<br />
+				<div class="claude-header">
+					<p class="claude-header-title"><span class="claude-brand">✻</span> Building with <strong>Agents</strong> in August 2025</p>
+				</div>
+				<br />
+				<div class="author-header">
+					<div class="author-header-content">
+						<div class="author-avatar"></div>
+						<div class="author-info">
+							<p class="author-header-title">Thushan Fernando</p>
+							<p class="author-header-github">
+								<svg class="github-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+								</svg>
+								<a href="https://github.com/thushan/talk-claude-code">thushan/talk-claude-code</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<section class="center-vertical">
+					<h2>What the heck are agents?</h2>
+					<img src="assets/img/matrix-agents-1.jpg" alt="Claude Agents" class="boring center">
+				</section>
+				
+				<section class="center-vertical">
+					<img src="assets/img/matrix-agents.jpg" alt="Claude Agents" class="boring center">
+					<p class="fragment">We'll find out...</p>
+				</section>
+				<section>
+					<h2>Agents in Essence</h2>
+					<img src="assets/img/agents/agentic-loop.excalidraw.png" alt="Claude Agents" class="boring center">
+				</section>
+				<section>
+					<h2>Agents in Task Decomposition</h2>
+					<img src="assets/img/agents/agentic-planning.excalidraw.png" alt="Claude Agents" class="boring center">
+				</section>
+			</section>
+			<section>
+				<section class="center-vertical">
+					<h2>Our AI Toolbox</h2>
+					<h3><span class="highlight-blue smaller">Working Smarter not Harder</span></h3>
+					<span class="highlight-green">August 2025</span>
+				</section>
+				<section>
+					<h2>Toolbox Overview</h2>
+					<img src="./assets/img/toolbox/toolbox.excalidraw.png" class="fragment">
+				</section>
+				<section>
+					<h2>The Process</h2>
+					<img src="./assets/img/toolbox/process.excalidraw.png" class="fragment image-full-width">
+				</section>
+			</section>
+			<section>
+				<section class="center-vertical">
+					<h2>Pivot Profiles</h2>
+					<h3><a href="https://chatgpt.com/share/689bcd25-9efc-8006-8ccb-ba8fcd5fd05e">Consulting ChatGPT</a></h3>
+					<span class="highlight-green">August 2025</span>
+				</section>
+				<section>
+					<h2>Pivot Profiles - What We're Building</h2>
+					<div class="pivot-overview fragment">
+						<p>A streamlined, trackable way to manage & share Consultant Profiles.</p>
+					</div>
+					<div class="pivot-draw fragment">
+						<p>Find useful datapoints about the Pivots to do cool things...</p>
+					</div>
+					<div class="pivot-draw fragment">
+						<p>...and get rid of Sharepointless most importantly!</p>
+					</div>
+				</section>
+
+				<section class="pivot-section">
+					<h3>Current Challenges</h3>
+					<ul>
+						<li class="fragment problem-item">Profiles are Word docs in SharePoint → stale, hard to update, emailed without control.</li>
+						<li class="fragment problem-item">Sales must chase updates; formatting is inconsistent  & varied styles / templates.</li>
+						<li class="fragment problem-item">Once shared, we lose visibility: who viewed, what they read, downloads.</li>
+					</ul>
+				</section>
+
+				<section class="pivot-section">
+					<h3>Single Source of Truth</h3>
+					<ul>
+						<li class="fragment solution-item">Profiles in <strong>Markdown + YAML</strong> (Git) with a clear schema.</li>
+						<li class="fragment solution-item">Brand-correct renders to <strong>Web / PDF / Word</strong>.</li>
+						<li class="fragment solution-item">Automated nudging to keep profiles fresh.</li>
+					</ul>
+				</section>
+
+				<section class="pivot-section">
+				<h3>System Overview</h3>
+				<ul>
+					<li class="fragment solution-item">Convert existing Word resumes → structured <strong>YAML/Markdown</strong>.</li>
+					<li class="fragment solution-item"><strong>Pivots</strong> maintain their profile in Git (single source of truth).</li>
+					<li class="fragment solution-item"><strong>Sales app</strong> to manage engagements, scope what's shared, and send links.</li>
+					<li class="fragment solution-item"><strong>Client viewer</strong> to securely read profiles and download allowed formats.</li>
+					<li class="fragment solution-item">Analytics & revocation built in at every step.</li>
+				</ul>
+				</section>
+
+				<section class="pivot-section">
+					<h3>Scoped, Secure Sharing</h3>
+					<ul>
+						<li class="fragment feature-item">Sales create an <strong>Engagement</strong>, pick consultants, choose sections to expose.</li>
+						<li class="fragment feature-item">Add attachments, set expiry/watermarks, send recipient-specific secure links.</li>
+						<li class="fragment feature-item">Instant <strong>revocation</strong> when access should end.</li>
+					</ul>
+				</section>
+
+				<section class="pivot-section">
+					<h3>Actionable Signals</h3>
+					<ul>
+						<li class="fragment feature-item">Track real opens (filter scanners) & attention minutes.</li>
+						<li class="fragment feature-item">See sections viewed and downloads per recipient.</li>
+						<li class="fragment feature-item">Live counters in the Sales dashboard.</li>
+					</ul>
+				</section>
+
+				<section class="pivot-section">
+					<h3>Future Vision</h3>
+					<ul>
+						<li class="fragment vision-item">Profiles become structured data assets.</li>
+						<li class="fragment vision-item">Combine with skills matrix & engagement history.</li>
+						<li class="fragment vision-item"><strong>Match the right Pivot to the right gig</strong> faster and with confidence.</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section class="center-vertical">
+					<h2>Exploring Concept</h2>
+					<h3>Using AI Toolbox</h3>
+					<a href="https://chatgpt.com/share/689bcd25-9efc-8006-8ccb-ba8fcd5fd05e">chatgpt.com/share/pivot-profiles</a>
+					<p>
+						<small class="highlight-green">
+							<span class="fragment smaller">+ Claude Code</span><br />
+						</small>
+					</p>
+					
+					<p class="fragment" style="margin-top: 50px;">
+						<small class="highlight-yellow">Pray ye to demo gods!</small>
+					</p>
+				</section>
+				<section>
+					<h2>Links</h2>
+					<ul>
+						<li><a href="https://chatgpt.com/share/689bcd25-9efc-8006-8ccb-ba8fcd5fd05e">chatgpt.com/share/pivot-profiles</a></li>
+						<li><a href="examples/pivot-profiles/concept/consultant-profile.yaml">examples/pivot-profiles/concept/consultant-profile.yaml</a></li>
+						<li><a href="examples/pivot-profiles/concept/consultant-profile.html">examples/pivot-profiles/concept/consultant-profile.html</a></li>
+						<li><a href="examples/pivot-profiles/concept/v0-prototype/index.html">v0/prototype</a></li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section class="center-vertical">
+					<h2>Claude Code</h2>
+					<h3><span class="highlight-blue smaller">Optimising Workflow</span></h3>
+				</section>
+				<section>
+					<h2>Think big, build small</h2>
+					<p class="fragment">Explore concept with an <strong>Advisor</strong>, build a detailed plan with Claude (<span class="highlight-green">/plan-mode</span>) but phase them.</p>
+					
+					<div class="strategy-grid">
+						<div class="strategy-card fragment">
+							<h4>🎯 Phase strategically</h4>
+							<ul>
+								<li>Think & Plan with <strong>Opus</strong></li>
+								<li>Build with <strong>Phases</strong></li>
+								<li>Orchestrate with <strong>Opus</strong></li>
+								<li>Develop with <strong>Sonnet</strong></li>
+							</ul>
+							<p class="fragment">PD may have <strong>50</strong> phases.</p>
+						</div>
+
+						<div class="strategy-card fragment">
+							<h4>🧠 Smart context</h4>
+							<ul>
+								<li><code>--model opus</code> for reasoning</li>
+								<li><code>--model sonnet</code> for work</li>
+								<li><code>--clear</code> not <code>--compact</code></li>
+							</ul>
+							<p class="fragment">Clear Claude after task.</p>
+						</div>
+
+						<div class="strategy-card fragment">
+							<h4>⚡ Scale patterns</h4>
+							<ul>
+								<li><strong>Modularise</strong> per subagent</li>
+								<li><strong>Template first</strong>, iterate</li>
+								<li><strong>Test incrementally</strong></li>
+								<li><strong>Commit each phase</strong></li>
+							</ul>
+							<p class="fragment">Progression in Git.</p>
+						</div>
+					</div>
+
+					<div class="fragment tip">
+						<p>Use the right <code>model</code> and reduce <code>context</code> & save <code>tokens</code>!</p>
+					</div>
+				</section>
+				<section class="center-vertical">
+					<h2>Claude Code</h2>
+					<span class="highlight-blue">Phase Detailed Build Example</span>
+				</section>
+			</section>
+			<section>
+				<section class="center-vertical">
+					<h2>Claude Code</h2>
+					<h3><span class="highlight-blue smaller">MCP Addons</span></h3>
+				</section>
+				<section>
+					<h2>What are they?</h2>
+					<ul>
+					<li class="fragment"><strong>Universal AI-Tool Bridge</strong> - Open protocol standardising connections between AI and external systems (the <em>USB-C for AI</em>)</li>
+					
+					<li class="fragment"><strong>Pre-built Integrations</strong> - Ready-made servers for Supabase, Github, APIs and development tools</li>
+					
+					<li class="fragment"><strong>Three Core Capabilities</strong>:
+						<ul>
+						<li class="fragment">Resources (file-like data access)</li>
+						<li class="fragment">Tools (executable functions with approval)</li>
+						<li class="fragment">Prompts (templated workflows)</li>
+						</ul>
+					</li>
+					
+					<li class="fragment"><strong>One-Click Installation</strong> - Simple <code>claude mcp add</code> commands replace complex manual configuration</li>
+					
+					<li class="fragment"><strong>Local & Secure</strong> - Servers run on your machine, keeping sensitive data private</li>
+					<li class="fragment"><strong>*BUT*</strong> - Would strongly evaluate MCP security boundaries & privacy</li>
+					<li class="fragment"><strong>Context-Aware Coding</strong> - Makes entire codebases searchable and accessible to Claude</li>					
+					<li class="fragment"><strong>Real-time Data Access</strong> - Live connections to APIs, databases, semantic search and external services during development</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Categories of MCP</h2>
+					<div class="mcp-categories-grid">
+						<div class="mcp-category fragment">
+							<div class="mcp-category-header">
+								<h4>🧠 Context</h4>
+								<p>Tools to help Claude understand APIs/tools better</p>
+							</div>
+							<div class="mcp-tools-list">
+								<div class="mcp-tool">
+									<strong><a href="https://context7.com/">Context7</a></strong>
+									<span>Constantly evolving documentation for APIs/Tools</span>
+								</div>
+								<div class="mcp-tool">
+									<strong><a href="https://ref.tools/mcp">Ref</a></strong>
+									<span>Better than Context7 - less token bloat, but paid</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="mcp-category fragment">
+							<div class="mcp-category-header">
+								<h4>🔍 Semantic Search</h4>
+								<p>Better tools than grep/ripgrep</p>
+							</div>
+							<div class="mcp-tools-list">
+								<div class="mcp-tool">
+									<strong><a href="https://github.com/oraios/serena">Serena</a></strong>
+									<span>Semantic search across documents for relevant information</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="mcp-category fragment">
+							<div class="mcp-category-header">
+								<h4>💭 Thinking</h4>
+								<p>Approaches for more structured reasoning</p>
+							</div>
+							<div class="mcp-tools-list">
+								<div class="mcp-tool">
+									<strong><a href="https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking">Sequential Thinking</a></strong>
+									<span>Step-by-step structured reasoning guidance</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="mcp-category fragment">
+							<div class="mcp-category-header">
+								<h4>🛠️ Tools</h4>
+								<p>General-purpose actions Claude can perform</p>
+							</div>
+							<div class="mcp-tools-list">
+								<div class="mcp-tool">
+									<strong><a href="https://browsermcp.io/">Browser</a></strong>
+									<span>Browse and interact with live web pages</span>
+								</div>
+								<div class="mcp-tool">
+									<strong><a href="https://github.com/microsoft/playwright-mcp">Playwright</a></strong>
+									<span>Automated browser testing and scripting</span>
+								</div>
+								<div class="mcp-tool">
+									<strong><a href="https://docs.apify.com/platform/integrations/mcp">Apify</a></strong>
+									<span>Web scraping and automation</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="mcp-category fragment">
+							<div class="mcp-category-header">
+								<h4>🏢 Products</h4>
+								<p>Integration with specific SaaS products</p>
+							</div>
+							<div class="mcp-tools-list">
+								<div class="mcp-tool">
+									<strong><a href="https://docs.stripe.com/api">Stripe</a></strong>
+									<span>Manage payments, customers, and subscriptions</span>
+								</div>
+								<div class="mcp-tool">
+									<strong><a href="https://supabase.com/docs/guides/api">Supabase</a></strong>
+									<span>Database queries and auth operations</span>
+								</div>
+								<div class="mcp-tool">
+									<strong><a href="https://vercel.com/docs/ai">Vercel</a></strong>
+									<span>Deploy and manage projects on Vercel</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h2>Context: Context7 / Ref</h2>
+					<p>Gives Claude the latest API/Reference documentation for tools - no more TailwindCSS blues!</p>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude mcp add --transport http context7 https://mcp.context7.com/mcp</span>								
+							</div>
+						</div>
+					</div>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude mcp add --transport http Ref "https://api.ref.tools/mcp?apiKey={API_KEY}"</span>								
+							</div>
+						</div>
+					</div>
+					<p><span class="fragment">Keeps Claude up to date with latest API changes</span></p>
+					<p><span class="fragment">Try both, you *may* like Ref over Context7</span></p>
+				</section>
+				<section>
+					<h2>Thinking / Semantic Code</h2>
+					<p>Give Claude better opportunties to think & nudge in the right way</p>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash (sequential-thinking)/span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude mcp add sequential-thinking -- uvx --from git+https://github.com/arben-adm/mcp-sequential-thinking --with portalocker mcp-sequential-thinking &&</span>								
+							</div>
+						</div>
+					</div>
+					<p><span class="fragment">Give Claude better ways to search code (symbols, methods) rather than ripgrep/grep</span></p>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash (serena)</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant --project $(pwd) &&</span>								
+							</div>
+						</div>
+					</div>
+					<p><span class="fragment">These are configured per project (notice the <code>pwd?</code>)</span></p>
+				</section>
+				<section>
+					<h2>Make life easier</h2>
+					<p>Add an alias to add these to each  project (see <a href="https://github.com/thushan/dotfiles/blob/main/.aliases#L63">my dotfiles</a>)</p>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash (aliases)/span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">cat ~/.aliases-claude</span>								
+							</div>
+							<pre class="cmd-output" style="padding-left: 40px;">								
+if [ -x "$(command -v claude)" ]; then	
+	alias claude-mcp-init='
+	  claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant --project $(pwd) &&
+	  claude mcp add sequential-thinking -- uvx --from git+https://github.com/arben-adm/mcp-sequential-thinking --with portalocker mcp-sequential-thinking &&
+	  claude mcp add --transport http context7 https://mcp.context7.com/mcp
+	'
+fi
+							</pre>
+						</div>
+					</div>
+					<p><span class="fragment">Then when you have a new project you can simply do:</span></p>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash (serena)</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">[~/projects/vibes/awesome-sass] $</span> <span class="cmd-command">claude-mcp-init</span>
+							</div>
+							<pre class="cmd-output" style="padding-left: 40px;">	
+Added stdio MCP server serena with command: uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context ide-assistant --project D:/projects/talk-claude-control/examples/pivot-profiles/src to local config
+File modified: C:\Users\thush\.claude.json [project: D:\projects\talk-claude-control\examples\pivot-profiles\src]
+Added stdio MCP server sequential-thinking with command: uvx --from git+https://github.com/arben-adm/mcp-sequential-thinking --with portalocker mcp-sequential-thinking to local config
+File modified: C:\Users\thush\.claude.json [project: D:\projects\talk-claude-control\examples\pivot-profiles\src]
+Added HTTP MCP server context7 with URL: https://mcp.context7.com/mcp to local config
+File modified: C:\Users\thush\.claude.json [project: D:\projects\talk-claude-control\examples\pivot-profiles\src]
+							</pre>
+						</div>
+					</div>
+				</section>
+<section>
+					<h2>Using those MCPs</h2>
+					<div class="vscode-terminal terminal-tall-scroll">
+					<div class="vscode-tabs">
+						<div class="vscode-tab active" data-tab="terminal">Planning</div>
+					</div>
+					<div class="vscode-terminal-content">
+						<div class="tab-content" id="terminal-content" style="display: block;">
+							<div class="terminal-block">
+								<pre class="cmd-output">
+... end with:
+
+Ensure you use:
+- serena for semantic code retrieval and editing tools
+- context7 for up to date documentation on third party code
+- sequential thinking for any decision making
+
+Read the claude.md root file before you do anything.
+
+Ask any clarifying questions or confirm your understanding before you start.
+</pre>
+							</div>
+						</div>
+					</div>
+				</div>
+				</section>			
+				<section>
+					<h2>Use MCPs Carefully</h2>
+					<p>Each MCP adds extra token usage, so be mindful of your limits.</p>
+					<ul>
+						<li class="fragment">Decide on core MCPs (like my <code>claude-mcp-init</code> alias)</li>
+						<li class="fragment">Add others when necessary for projects eg. <code>Supabase</code></li>
+						<li class="fragment">Monitor MCP token usage with <code>/context</code></li>
+						<li class="fragment">Always verify MCPs and security, some are badness!</li>
+					</ul>
+					<p class="fragment">Always remember <code>less > more</code></p>
+				</section>			
+			</section>		
+			<section>
+				<section class="center-vertical">
+					<h2>Whats New</h2>
+					<h3><span class="claude-code-style">Claude Code</span></h3>
+					<span class="highlight-pink">August 2025</span>
+				</section>
+				<section>
+					<h3>Opus Plan Mode</h3>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude</span>
+								<span class="cmd-output">
+									<div class="claude-image-paste-interface">
+										<div class="claude-ready-prompt">
+											<span class="claude-prompt-symbol">&gt;</span>/model<span class="blinking-cursor">█</span>
+										</div>
+										<div class="claude-model-select">
+											<div class="model-select-header">
+												<span class="model-select-title">Select Model</span>
+											</div>
+											<div class="model-select-subtitle">
+												Switch between Claude models. Applies to this session and future Claude Code sessions. For custom model names, specify with --model.
+											</div>
+											<div class="model-options">
+												<div class="model-option selected">
+													<span class="model-number">1.</span>
+													<span class="model-name">Default (recommended)</span>
+													<span class="model-desc">Opus 4.1 for complex tasks • Sonnet 4 otherwise</span>
+													<span class="model-indicator">✓</span>
+												</div>
+												<div class="model-option">
+													<span class="model-number">2.</span>
+													<span class="model-name">Opus</span>
+													<span class="model-desc">Opus 4.1 for complex tasks • Reaches usage limits faster</span>
+												</div>
+												<div class="model-option">
+													<span class="model-number">3.</span>
+													<span class="model-name">Sonnet</span>
+													<span class="model-desc">Sonnet 4 for daily use</span>
+												</div>
+												<div class="model-option">
+													<span class="model-number">4.</span>
+													<span class="model-name">Opus Plan Mode</span>
+													<span class="model-desc">Use Opus 4.1 in plan mode, Sonnet 4 otherwise</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p class="fragment">Get the best of Opus (<span class="highlight-pink">brains</span>) and Sonnet (<span class="highlight-green">work ethic</span>) with Claude Code.</p>
+				</section>	
+				<section>
+					<h3>Paste Images easily</h3>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude</span>
+								<span class="cmd-output">
+									<div class="claude-image-paste-interface">
+										<div class="claude-ready-prompt">
+											<span class="claude-prompt-symbol">&gt; </span>Create a UI in HTML that looks like [Image #1]<span class="blinking-cursor">█</span>
+										</div>
+										<!--
+										<div class="paste-status-bar">
+											<div class="paste-hint">
+												<span class="paste-instruction">⏵⏵ bypass permissions on <span class="shortcut-hint">(alt+m to cycle)</span></span>
+											</div>
+											<div class="context-indicator">
+												<span class="context-text">Context left until auto-compact: 7%</span>
+											</div>
+										</div>
+										-->
+									</div>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p class="fragment">Windows: <kbd>ALT</kbd>+<kbd>V</kbd> | Mac/Linux: <kbd>CTRL</kbd>+<kbd>V</kbd></p>
+				</section>
+				<section>
+					<h3>Claude Context</h3>
+					<p class="fragment">Understand the context usage in Claude Code easily</p>
+					<div class="terminal-window terminal-full-height fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - bash</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude</span>
+								<span class="cmd-output">
+									<div class="context-usage-display">
+										<div class="context-command-line">
+											<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/context</span>
+										</div>
+										<div class="context-main">
+											<div class="context-left">
+												<div class="context-legend">L</div>
+												<div class="context-blocks-visual">
+													<span class="block system">⛁</span><span class="block system">⛁</span><span class="block system">⛁</span><span class="block tools">⛁</span><span class="block tools">⛁</span><span class="block tools">⛁</span><span class="block tools">⛁</span><span class="block tools">⛁</span><span class="block tools">⛁</span><span class="block mcp">⛁</span><br>
+													<span class="block mcp">⛁</span><span class="block mcp">⛁</span><span class="block mcp">⛁</span><span class="block mcp">⛁</span><span class="block mcp">⛁</span><span class="block mcp">⛁</span><span class="block mcp">⛁</span><span class="block memory">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><br>
+													<span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><br>
+													<span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><span class="block messages">⛁</span><br>
+													<span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><br>
+													<span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><br>
+													<span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span><span class="block free">⛶</span>
+												</div>
+											</div>
+											<div class="context-right">
+												<div class="context-header-line">
+													<span class="context-title">Context Usage</span>
+												</div>
+												<div class="context-subtitle">
+													claude-opus-4-1-20250805 • 75k/200k tokens (37%)
+												</div>
+												<div class="context-breakdown">
+													<div class="stat-line">
+														<span class="stat-icon system">⛁</span><span class="stat-label">System prompt:</span> <span class="stat-value">3.0k tokens (1.5%)</span>
+													</div>
+													<div class="stat-line">
+														<span class="stat-icon tools">⛁</span><span class="stat-label">System tools:</span> <span class="stat-value">11.9k tokens (6.0%)</span>
+													</div>
+													<div class="stat-line">
+														<span class="stat-icon mcp">⛁</span><span class="stat-label">MCP tools:</span> <span class="stat-value">15.1k tokens (7.5%)</span>
+													</div>
+													<div class="stat-line">
+														<span class="stat-icon memory">⛁</span><span class="stat-label">Memory files:</span> <span class="stat-value">1.6k tokens (0.8%)</span>
+													</div>
+													<div class="stat-line">
+														<span class="stat-icon messages">⛁</span><span class="stat-label">Messages:</span> <span class="stat-value">43.3k tokens (21.7%)</span>
+													</div>
+													<div class="stat-line">
+														<span class="stat-icon free">⛶</span><span class="stat-label">Free space:</span> <span class="stat-value">125.2k (62.6%)</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="context-stats">
+											
+											<div class="context-details">
+												<div class="mcp-tools-section">
+													<div class="section-header">
+														<span class="section-title">MCP tools</span>
+														<span class="section-command">· /mcp</span>
+													</div>
+													<div class="tools-list">
+														<div class="tool-item">└ mcp__context7__resolve-library-id (context7): <span class="token-count">691 tokens</span></div>
+														<div class="tool-item">└ mcp__context7__get-library-docs (context7): <span class="token-count">652 tokens</span></div>
+														<div class="tool-item">└ mcp__sequential-thinking__process_thought (sequential-thinking): <span class="token-count">1.1k tokens</span></div>
+														<div class="tool-item">└ mcp__sequential-thinking__generate_summary (sequential-thinking): <span class="token-count">400 tokens</span></div>
+														<div class="tool-item">└ mcp__sequential-thinking__clear_history (sequential-thinking): <span class="token-count">393 tokens</span></div>
+														<div class="tool-item">└ mcp__sequential-thinking__export_session (sequential-thinking): <span class="token-count">439 tokens</span></div>
+														<div class="tool-item">└ mcp__sequential-thinking__import_session (sequential-thinking): <span class="token-count">438 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__list_dir (serena): <span class="token-count">575 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__find_file (serena): <span class="token-count">496 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__search_for_pattern (serena): <span class="token-count">1.4k tokens</span></div>
+														<div class="tool-item">└ mcp__serena__get_symbols_overview (serena): <span class="token-count">564 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__find_symbol (serena): <span class="token-count">1.6k tokens</span></div>
+														<div class="tool-item">└ mcp__serena__find_referencing_symbols (serena): <span class="token-count">676 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__replace_symbol_body (serena): <span class="token-count">539 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__insert_after_symbol (serena): <span class="token-count">555 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__insert_before_symbol (serena): <span class="token-count">562 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__write_memory (serena): <span class="token-count">470 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__read_memory (serena): <span class="token-count">488 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__list_memories (serena): <span class="token-count">387 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__delete_memory (serena): <span class="token-count">442 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__check_onboarding_performed (serena): <span class="token-count">417 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__onboarding (serena): <span class="token-count">406 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__think_about_collected_information (serena): <span class="token-count">436 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__think_about_task_adherence (serena): <span class="token-count">436 tokens</span></div>
+														<div class="tool-item">└ mcp__serena__think_about_whether_you_are_done (serena): <span class="token-count">401 tokens</span></div>
+													</div>
+												</div>
+												
+												<div class="memory-files-section">
+													<div class="section-header">
+														<span class="section-title">Memory files</span>
+														<span class="section-command">· /memory</span>
+													</div>
+													<div class="memory-list">
+														<div class="memory-item">└ Project (D:\projects\thushan-llama-monk\CLAUDE.md): 1.6k tokens</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</span>
+							</div>
+						</div>
+					</div>
+				</section>
+			</section>
+			
+			<!-- Q&A Slide -->
+			<section data-background-color="#0d1117" class="center-vertical">
+				<h1>Questions?</h1>
+				<p>Let's discuss!</p>
+				<div style="margin-top: 60px;">
+					<p><small>Slides: <a href="#" class="learn-code">github.com/thushan/talk-claude-code</a></small></p>
+				</div>
+			</section>
+
+			<!-- Resources -->
+			<section>
+				<h3>Resources</h3>
+				<ul class="resources">
+					<li><a href="https://www.anthropic.com/claude-code" class="learn-more">Claude Code Home</a></li>
+					<li><a href="https://docs.anthropic.com/en/docs/claude-code/common-workflows" class="learn-more">Claude Code Workflows</a> (Anthropic)</li>
+					<li><a href="https://www.anthropic.com/engineering/claude-code-best-practices" class="learn-more">Claude Code Best Practices</a> (Anthropic)</li>
+					<li><a href="https://publish.obsidian.md/aixplore/AI+Development+%26+Agents/claude-code-best-practices" class="learn-more">Claude Code Best Practices</a> (AIXplore)</li>
+					<li><a href="https://github.com/hesreallyhim/awesome-claude-code">Awesome Claude Code</a></li>
+				</ul>
+			</section>
+
+			<section data-markdown>
+				## Thank You!
+				
+				<span class="mind-blown">Stay curious, keep building!</span>
+				
+				[@thushanfernando](https://twitter.com/thushanfernando)
+				
+				[github.com/thushan](https://github.com/thushan)
+			</section>
+		</div>
+	</div>
+
+	<script src="engine/reveal.js"></script>
+	<script src="engine/plugin/notes/notes.js"></script>
+	<script src="engine/plugin/markdown/markdown.js"></script>
+	<script src="engine/plugin/highlight/highlight.js"></script>
+	<script src="engine/plugin/chalkboard/plugin.js"></script>
+	<script src="engine/modern-enhancements.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			
+			// Responsive viewport configuration
+			width: '100%',
+			height: '100%',
+			margin: 0.04,
+			minScale: 0.5,
+			maxScale: 2.0,
+			
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealChalkboard ],
+			
+			// Presentation options
+			controls: true,
+			progress: true,
+			center: false,
+			transition: 'fade',
+			
+			// Chalkboard plugin options
+			chalkboard: {
+				boardmarkerWidth: 3,
+				chalkWidth: 7,
+				chalkEffect: 1.0,
+				storage: null,
+				src: null,
+				readOnly: false,
+				messageType: 'broadcast',
+				toggleChalkboardButton: { left: "30px", bottom: "30px", top: "auto", right: "auto" },
+				toggleNotesButton: { left: "30px", bottom: "30px", top: "auto", right: "auto" },
+				colorButtons: true,
+				boardHandle: true,
+				transition: 800,
+				theme: "chalkboard",
+				background: [ 'rgba(127,127,127,.1)' , 'engine/plugin/chalkboard/img/blackboard.png' ],
+				grid: { color: 'rgb(50,50,10,0.5)', distance: 40, width: 2},
+				eraser: { src: 'engine/plugin/chalkboard/img/sponge.png', radius: 20},
+				boardmarkers : [
+						{ color: 'rgba(100,100,100,1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-black.png), auto'},
+						{ color: 'rgba(30,144,255, 1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-blue.png), auto'},
+						{ color: 'rgba(220,20,60,1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-red.png), auto'},
+						{ color: 'rgba(50,205,50,1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-green.png), auto'},
+						{ color: 'rgba(255,140,0,1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-orange.png), auto'},
+						{ color: 'rgba(150,0,150,1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-purple.png), auto'},
+						{ color: 'rgba(255,220,0,1)', cursor: 'url(engine/plugin/chalkboard/img/boardmarker-yellow.png), auto'}
+				]
+			}
+		});
+
+		// Lazy load heavy plugins
+		let chartLoaded = false;
+		let mermaidLoaded = false;
+
+		Reveal.on('slidechanged', event => {
+			// Check if current slide needs Chart.js
+			if (!chartLoaded && event.currentSlide.querySelector('[data-chart]')) {
+				chartLoaded = true;
+				const script = document.createElement('script');
+				script.src = 'engine/plugin/chart/chart.min.js';
+				script.onload = () => {
+					const chartScript = document.createElement('script');
+					chartScript.src = 'engine/plugin/chart/plugin.js';
+					chartScript.onload = () => {
+						Reveal.registerPlugin('RevealChart', RevealChart);
+						Reveal.sync();
+					};
+					document.body.appendChild(chartScript);
+				};
+				document.body.appendChild(script);
+			}
+
+			// Check if current slide needs Mermaid
+			if (!mermaidLoaded && event.currentSlide.querySelector('.mermaid')) {
+				mermaidLoaded = true;
+				const script = document.createElement('script');
+				script.src = 'engine/plugin/mermaid/mermaid.js';
+				script.onload = () => {
+					Reveal.registerPlugin('RevealMermaid', RevealMermaid);
+					Reveal.sync();
+				};
+				document.body.appendChild(script);
+			}
+		});
+	</script>
+</body>
+</html>
