@@ -8,8 +8,8 @@ Presentation covering insights into Claude Code - part one and Building with age
 
 ## Getting Started
 
-[![Part I: Effectively Using Claude Code](https://img.shields.io/badge/View-Presentation%20Online-informational?style=for-the-badge)](https://thushan.github.io/talk-claude-code)
-[![Part II: Building with Agents](https://img.shields.io/badge/View-Presentation%20Online-informational?style=for-the-badge)](https://thushan.github.io/talk-claude-code/index-agents.html)
+[![Part I: Effectively Using Claude Code](https://img.shields.io/badge/View-Part%20I-informational?style=for-the-badge)](https://thushan.github.io/talk-claude-code)
+[![Part II: Building with Agents](https://img.shields.io/badge/View-Part%20II-informational?style=for-the-badge)](https://thushan.github.io/talk-claude-code/index-agents.html)
 
 You can open this project within VSCode and preview the `index.html` or `index-agents.html` file which includes the full presentation slides + memes & examples.
 
