@@ -1080,6 +1080,37 @@ argument-hint: [issue-number]
 				</section>
 			</section>
 
+			<!-- ==================== REDUCING HALLUCINATIONS ==================== -->
+			<section>
+				<section>
+					<h2>Reducing Hallucinations</h2>
+					<p class="fragment" style="font-size: 0.85em;">Claude can still make things up. These patterns help keep it honest.</p>
+					<ul class="idea" style="font-size: 0.85em;">
+						<li class="fragment"><strong>Let it say "I don't know"</strong> &ndash; give explicit permission to admit uncertainty</li>
+						<li class="fragment"><strong>Ground with direct quotes</strong> &ndash; ask Claude to extract exact quotes before analysing</li>
+						<li class="fragment"><strong>Verify with citations</strong> &ndash; require a supporting quote for each claim, retract if none found</li>
+						<li class="fragment"><strong>Restrict to provided context</strong> &ndash; "only use information from these documents"</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">CLAUDE.md example</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+<pre class="cmd-output">When answering questions about this codebase:
+- Only reference files you have actually read
+- If unsure, say "I'm not sure" rather than guessing
+- Back up claims with exact code snippets
+- Do not invent function names, APIs, or config options</pre>
+							</div>
+						</div>
+					</div>
+				</section>
+			</section>
+
 			<!-- ==================== DEMO ==================== -->
 			<section data-background-color="#161b22" class="center-vertical">
 				<h2>Demo Time</h2>
