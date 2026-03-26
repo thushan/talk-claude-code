@@ -1,0 +1,1143 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="description" content="Claude Code in 2026 - What's Changed">
+	<meta name="author" content="Thushan Fernando">
+
+	<title>Claude Code (2026)</title>
+
+	<link rel="stylesheet" href="engine/reset.css">
+	<link rel="stylesheet" href="engine/reveal.css">
+	<link rel="stylesheet" href="engine/theme/modern-dark.css" id="theme">
+	<link rel="stylesheet" href="engine/modern.css">
+	<link rel="stylesheet" href="engine/thushan.css">
+	<link rel="stylesheet" href="engine/claude.css">
+	<link rel="stylesheet" href="engine/plugin/highlight/claude-dark.css" id="highlight-theme">
+
+	<style>
+		/* Presentation-specific styles */
+		.author-header {
+			background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+			border: 1px solid #444;
+			border-radius: 12px;
+			padding: 20px 30px;
+			margin: 20px auto 60px;
+			max-width: fit-content;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+			display: inline-block;
+			position: relative;
+			overflow: hidden;
+		}
+		.author-header::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 2px;
+			background: linear-gradient(90deg, transparent, #CF7D5B, transparent);
+			opacity: 0.5;
+		}
+		.author-header-content {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+		}
+		.author-info {
+			text-align: left;
+		}
+		.author-header-title {
+			color: #e0e0e0;
+			font-size: 18px;
+			font-family: var(--font-family-base);
+			margin: 0 0 8px 0;
+			font-weight: 500;
+			letter-spacing: 0.5px;
+		}
+		.author-header-github {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			color: #a0a0a0;
+			font-size: 14px;
+			font-family: var(--font-family-mono);
+			margin: 0;
+			font-weight: 400;
+		}
+		.author-header-github a {
+			color: var(--text-accent);
+			text-decoration: none;
+			transition: color var(--transition-fast);
+		}
+		.author-header-github a:hover {
+			color: var(--text-highlight);
+			text-decoration: underline;
+		}
+		.github-icon {
+			width: 20px;
+			height: 20px;
+			fill: #a0a0a0;
+			transition: fill var(--transition-fast);
+		}
+		.author-header-github:hover .github-icon {
+			fill: var(--text-accent);
+		}
+		.author-avatar {
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+			border: 2px solid #444;
+			background: #1a1a1a;
+			background-image: url('https://media.licdn.com/dms/image/v2/D5603AQGJzlomNE5kqA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1676539323661?e=2147483647&v=beta&t=TdEGZPzzTDvbeMELBWdQYz4Zmv65yZOOMHV0DN4k2-o');
+			background-size: cover;
+			background-position: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 24px;
+			color: var(--text-accent);
+			font-weight: 600;
+		}
+		.reveal .title-slide img {
+			max-width: 500px;
+			margin: 0 auto;
+			display: block;
+		}
+		.reveal .title-slide {
+			text-align: center;
+			padding-top: 50px;
+		}
+
+		/* Timeline / What Changed section */
+		.delta-card {
+			background: rgba(207, 125, 91, 0.08);
+			border-left: 4px solid #CF7D5B;
+			padding: 10px 18px;
+			margin: 8px 0;
+			border-radius: 0 8px 8px 0;
+			text-align: left;
+			font-size: 0.8em;
+		}
+		.delta-card.green {
+			background: rgba(34, 197, 94, 0.08);
+			border-left-color: #22c55e;
+		}
+		.delta-card.blue {
+			background: rgba(59, 130, 246, 0.08);
+			border-left-color: #3b82f6;
+		}
+		.delta-card.purple {
+			background: rgba(168, 85, 247, 0.08);
+			border-left-color: #a855f7;
+		}
+		.delta-card.red {
+			background: rgba(239, 68, 68, 0.08);
+			border-left-color: #ef4444;
+		}
+
+		/* Agent team architecture diagram */
+		.arch-diagram {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 10px;
+			margin: 15px 0;
+		}
+		.arch-box {
+			background: var(--bg-tertiary);
+			border: 2px solid var(--border-color);
+			border-radius: 8px;
+			padding: 10px 20px;
+			font-family: var(--font-family-mono);
+			font-size: 0.75em;
+			color: #e8e8e8;
+			text-align: center;
+			min-width: 160px;
+		}
+		.arch-box.lead {
+			border-color: #CF7D5B;
+			background: rgba(207, 125, 91, 0.15);
+		}
+		.arch-box.teammate {
+			border-color: #3b82f6;
+			background: rgba(59, 130, 246, 0.1);
+		}
+		.arch-row {
+			display: flex;
+			gap: 12px;
+			justify-content: center;
+			flex-wrap: wrap;
+		}
+		.arch-arrow {
+			color: #6b7280;
+			font-size: 1.2em;
+		}
+
+		/* Comparison table tweaks */
+		.comparison-row {
+			display: flex;
+			gap: 12px;
+			margin: 6px 0;
+			align-items: stretch;
+		}
+		.comparison-col {
+			flex: 1;
+			padding: 10px 14px;
+			border-radius: 8px;
+			font-size: 0.75em;
+		}
+		.comparison-col.was {
+			background: rgba(239, 68, 68, 0.08);
+			border: 1px solid rgba(239, 68, 68, 0.3);
+		}
+		.comparison-col.now {
+			background: rgba(34, 197, 94, 0.08);
+			border: 1px solid rgba(34, 197, 94, 0.3);
+		}
+		.comparison-label {
+			font-size: 0.75em;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			color: #8b949e;
+			margin-bottom: 4px;
+		}
+
+		/* Voice mode indicator */
+		.voice-indicator {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			background: rgba(168, 85, 247, 0.15);
+			border: 1px solid rgba(168, 85, 247, 0.4);
+			border-radius: 20px;
+			padding: 6px 16px;
+			font-family: var(--font-family-mono);
+			font-size: 0.85em;
+		}
+		.voice-dot {
+			width: 8px;
+			height: 8px;
+			background: #a855f7;
+			border-radius: 50%;
+			animation: pulse-dot 1.5s infinite;
+		}
+		@keyframes pulse-dot {
+			0%, 100% { opacity: 1; }
+			50% { opacity: 0.3; }
+		}
+	</style>
+</head>
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<!-- ==================== TITLE ==================== -->
+			<section class="title-slide">
+				<img src="assets/img/claude-code.png" alt="Claude Code Header" class="boring center">
+				<br />
+				<div class="claude-header">
+					<p class="claude-header-title"><span class="claude-brand">&#10043;</span> <strong>Claude Code</strong> in 2026</p>
+				</div>
+				<br />
+				<div class="author-header">
+					<div class="author-header-content">
+						<div class="author-avatar"></div>
+						<div class="author-info">
+							<p class="author-header-title">Thushan Fernando</p>
+							<p class="author-header-github">
+								<svg class="github-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+								</svg>
+								<a href="https://github.com/thushan/talk-claude-code">thushan/talk-claude-code</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- ==================== SINCE LAST TIME ==================== -->
+			<section>
+				<section class="center-vertical">
+					<h2>Since Last Time...</h2>
+					<p class="highlight-pink">July 2025 &rarr; March 2026</p>
+				</section>
+
+				<section>
+					<h2>The Big Deltas</h2>
+					<div class="delta-card fragment">
+						<strong>Opus 4.6</strong> is the default model
+					</div>
+					<div class="delta-card green fragment">
+						<strong>1M token context</strong> window (Max/Team/Enterprise)
+					</div>
+					<div class="delta-card blue fragment">
+						<strong>128K output</strong> tokens (64K default, 128K ceiling)
+					</div>
+					<div class="delta-card purple fragment">
+						<strong>Voice mode</strong>, <strong>/loop</strong> cron tasks, <strong>Agent Teams</strong>
+					</div>
+					<div class="delta-card red fragment">
+						<strong>Plugins</strong>, <strong>MCP elicitation</strong>, <strong>remote control</strong>
+					</div>
+				</section>
+
+				<section>
+					<h2>Then vs Now</h2>
+					<div class="comparison-row fragment">
+						<div class="comparison-col was">
+							<div class="comparison-label">July 2025</div>
+							Opus 4 / Sonnet 4 &bull; 200K context
+						</div>
+						<div class="comparison-col now">
+							<div class="comparison-label">March 2026</div>
+							Opus 4.6 / Sonnet 4.6 &bull; up to 1M context
+						</div>
+					</div>
+					<div class="comparison-row fragment">
+						<div class="comparison-col was">
+							<div class="comparison-label">Effort Control</div>
+							<code>ultrathink</code> keyword in prompt
+						</div>
+						<div class="comparison-col now">
+							<div class="comparison-label">Effort Control</div>
+							<code>/effort low | medium | high</code>
+						</div>
+					</div>
+					<div class="comparison-row fragment">
+						<div class="comparison-col was">
+							<div class="comparison-label">Multi-Agent</div>
+							DIY subagents via Task() tool
+						</div>
+						<div class="comparison-col now">
+							<div class="comparison-label">Multi-Agent</div>
+							Native <strong>Agent Teams</strong> with shared task list
+						</div>
+					</div>
+					<div class="comparison-row fragment">
+						<div class="comparison-col was">
+							<div class="comparison-label">Interaction</div>
+							Keyboard only, terminal text
+						</div>
+						<div class="comparison-col now">
+							<div class="comparison-label">Interaction</div>
+							<strong>Push-to-talk voice</strong>, remote control from phone
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<!-- ==================== UNDER THE HOOD ==================== -->
+			<section>
+				<section class="center-vertical">
+					<h2>Under the Hood</h2>
+					<span class="highlight-yellow">how you get it, how it runs</span>
+				</section>
+
+				<!-- Native Binary -->
+				<section>
+					<h2>Native Binary</h2>
+					<p class="fragment">Claude Code no longer needs Node.js.</p>
+					<ul class="idea">
+						<li class="fragment">Single ~100MB binary: your TypeScript app bundled with the Bun runtime</li>
+						<li class="fragment">~5ms startup (was ~50ms with V8). No npm, no version conflicts</li>
+						<li class="fragment">Auto-updates in the background on startup</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">curl -fsSL https://claude.ai/install.sh | bash</span>
+							</div>
+							<div class="terminal-block">
+								<pre class="cmd-output"># or migrate from npm:
+$ claude install
+$ npm uninstall -g @anthropic-ai/claude-code</pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Auto Mode -->
+				<section>
+					<h2>Auto Mode</h2>
+					<p class="fragment">A middle ground between approving everything and YOLO mode.</p>
+					<ul class="idea">
+						<li class="fragment">A background classifier reviews each action before execution</li>
+						<li class="fragment">Auto-approves safe ops (local edits, reads, dependency installs)</li>
+						<li class="fragment">Blocks risky ops (force push, prod deploys, curl | bash)</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude --enable-auto-mode</span>
+							</div>
+							<div class="terminal-block">
+								<pre class="cmd-output"># or Shift+Tab to cycle:
+# Ask &rarr; Auto Edits &rarr; Auto &rarr; Plan</pre>
+							</div>
+						</div>
+					</div>
+					<p class="fragment">Sonnet 4.6 or Opus 4.6 only, research-preview still.</small></p>
+				</section>
+
+			</section>
+
+			<!-- ==================== FEATURE SLIDES ==================== -->
+			<section>
+				<section class="center-vertical">
+					<h2>What's New</h2>
+					<span class="highlight-green">the good stuff</span>
+				</section>
+
+				<!-- /loop -->
+				<section>
+					<h2>/loop &ndash; Scheduled Tasks</h2>
+					<p class="fragment">Cron-like recurring tasks within Claude Code.</p>
+					<ul class="idea">
+						<li class="fragment">PR review monitoring</li>
+						<li class="fragment">Deployment health checks</li>
+						<li class="fragment">Periodic code quality scans</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/loop every 30m check for new PRs and summarise changes</span>
+							</div>
+						</div>
+					</div>
+					<p class="fragment"><small>Disable mid-session: <code>CLAUDE_CODE_DISABLE_CRON=1</code></small></p>
+				</section>
+
+				<!-- /effort -->
+				<section>
+					<h2>/effort &ndash; Reasoning Control</h2>
+					<p class="fragment">Tell Claude how hard to think about your request.</p>
+					<ul class="idea">
+						<li class="fragment"><code>low</code> for quick fixes and simple questions</li>
+						<li class="fragment"><code>medium</code> for everyday coding tasks</li>
+						<li class="fragment"><code>high</code> for architecture decisions, moderate debugging</li>
+						<li class="fragment"><code>max</code> for ambitious large work, complex debugging</li>
+						<li class="fragment"><code>auto</code> let claude decide (default)</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/effort high</span>
+							</div>
+							<div class="terminal-block">
+								<pre class="cmd-output">Effort set to high ●
+Extended thinking enabled for complex tasks.</pre>
+							</div>
+						</div>
+					</div>
+					<p class="fragment"><small>Replaces the old <code>ultrathink</code> hack.</small></p>
+				</section>
+
+				<!-- Voice Mode -->
+				<section>
+					<h2>Voice Mode</h2>
+					<div class="voice-indicator fragment">
+						<div class="voice-dot"></div>
+						<span>/voice &ndash; Push-to-Talk</span>
+					</div>
+					<ul class="idea" style="margin-top: 20px;">
+						<li class="fragment">Hold <kbd>Space</kbd> to speak, release to send</li>
+						<li class="fragment">20 languages, good transcription for dev terms</li>
+						<li class="fragment">Great for dictating requirements or pair programming</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/voice</span>
+							</div>
+							<div class="terminal-block">
+								<pre class="cmd-output">Voice mode active. Hold Space to speak.</pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Custom Agents -->
+				<section>
+					<h2>Custom Agents</h2>
+					<p class="fragment">Define specialised agents in <code>.claude/agents/</code></p>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">.claude/agents/test-engineer.md</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+<pre class="cmd-output">---
+model: sonnet
+effort: high
+tools: [bash, read, write, Task(subagent)]
+---
+
+You are a senior test engineer. Your job is to:
+- Write comprehensive unit & integration tests
+- Ensure edge cases and error paths are covered
+- Run `go test ./...` after every change
+- Never modify production code, only test files</pre>
+							</div>
+						</div>
+					</div>
+					<p class="fragment"><small>Invoke with <code>claude --agent test-engineer</code></small></p>
+				</section>
+
+				<!-- Hooks -->
+				<section>
+					<h2>Hooks</h2>
+					<p class="fragment">Event-driven automation in your workflow.</p>
+					<ul class="idea">
+						<li class="fragment"><code>PreToolUse</code> / <code>PostToolUse</code> for lint and format</li>
+						<li class="fragment"><code>SessionStart</code> to prime context</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">settings.json</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+<pre class="cmd-output">"PostToolUse": [{
+  "matcher": "Write",
+  "command": "npx prettier --write $TOOL_INPUT_FILE"
+}]</pre>
+							</div>
+						</div>
+					</div>
+					<p class="fragment"><small>Also: <code>TaskCompleted</code>, <code>TeammateIdle</code>, HTTP hooks</small></p>
+				</section>
+
+				<!-- Skills -->
+				<section>
+					<h2>Skills</h2>
+					<p class="fragment">Reusable instruction sets you invoke as slash commands.</p>
+					<ul class="idea">
+						<li class="fragment">Define in <code>.claude/skills/</code> with a <code>SKILL.md</code> file</li>
+						<li class="fragment">Invoke manually (<code>/skill-name</code>) or auto-triggered by context</li>
+						<li class="fragment">Can restrict tools, set effort, run in isolated subagents</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">.claude/skills/fix-issue/SKILL.md</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+<pre class="cmd-output">---
+name: fix-issue
+description: Fix a GitHub issue by number
+user-invocable: true
+argument-hint: [issue-number]
+---
+
+1. Read the issue with `gh issue view $ARGUMENTS`
+2. Reproduce the bug with a failing test
+3. Fix the code, ensure tests pass
+4. Commit with "fix: closes #$ARGUMENTS"</pre>
+							</div>
+						</div>
+					</div>
+					<p class="fragment"><small>Usage: <code>/fix-issue 42</code></small></p>
+				</section>
+
+				<!-- Plugins -->
+				<section>
+					<h2>Plugins</h2>
+					<p class="fragment">Bundles of skills, agents, hooks, and MCP servers you can share.</p>
+					<ul class="idea">
+						<li class="fragment">Install from marketplaces: <code>/plugin install github@official</code></li>
+						<li class="fragment">Scoped to user, project, or org</li>
+						<li class="fragment">Admins can force-enable or restrict plugins for teams</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/plugin install commit-commands@official</span>
+							</div>
+							<div class="terminal-block">
+								<pre class="cmd-output">Installed commit-commands (3 skills, 1 hook)
+  /commit, /pr, /changelog</pre>
+							</div>
+						</div>
+					</div>
+					<p class="fragment"><small>Skills are the instructions. Plugins are how you distribute them.</small></p>
+				</section>
+
+				<!-- Recommended Plugins -->
+				<section>
+					<h2>Plugins Worth Installing</h2>
+					<div class="terminal-window">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<pre class="cmd-output"><span class="cmd-prompt">#</span> Symbol-level code understanding (30+ languages)
+<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/plugin install serena</span>
+
+<span class="cmd-prompt">#</span> Persistent cross-session memory (github.com/thedotmack/claude-mem)
+<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/plugin marketplace add thedotmack/claude-mem</span>
+<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/plugin install claude-mem</span>
+
+<span class="cmd-prompt">#</span> Live, version-specific docs in your prompts
+<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/plugin install context7</span>
+
+<span class="cmd-prompt">#</span> Browser control for frontend testing
+<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/plugin install playwright</span></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- /btw -->
+				<section>
+					<h2>/btw &ndash; Side Questions</h2>
+					<p class="fragment">Ask a quick question without derailing your main task.</p>
+					<ul class="idea">
+						<li class="fragment">Ephemeral: doesn't pollute your conversation history</li>
+						<li class="fragment">Uses prompt cache, so it's cheap and fast</li>
+						<li class="fragment">Perfect for "what does this flag do?" mid-task</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/btw what's the difference between SIGTERM and SIGKILL?</span>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- /compact -->
+				<section>
+					<h2>/compact &ndash; Context Compaction</h2>
+					<p class="fragment">Summarise your conversation to free up context space.</p>
+					<ul class="idea">
+						<li class="fragment">Server-side summarisation, preserves coherence</li>
+						<li class="fragment">Run it before long tasks to maximise usable context</li>
+						<li class="fragment">Pass a topic to focus the summary</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/compact focus on the auth refactor decisions</span>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- /review -->
+				<section>
+					<h2>/review &ndash; PR Review</h2>
+					<p class="fragment">Get a detailed code review of a pull request.</p>
+					<ul class="idea">
+						<li class="fragment">Analyses diffs, flags issues, suggests improvements</li>
+						<li class="fragment">Works with GitHub PRs out of the box</li>
+						<li class="fragment">Can post comments directly to the PR</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/review 142</span>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- /simplify -->
+				<section>
+					<h2>/simplify &ndash; Code Cleanup</h2>
+					<p class="fragment">Review your recent changes for quality, then fix them.</p>
+					<ul class="idea">
+						<li class="fragment">Checks for duplication, dead code, unnecessary complexity</li>
+						<li class="fragment">Applies fixes automatically after review</li>
+						<li class="fragment">Great to run before committing</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/simplify</span>
+							</div>
+							<div class="terminal-block">
+								<pre class="cmd-output">Reviewing 4 changed files for reuse &amp; quality...</pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- /batch -->
+				<section>
+					<h2>/batch &ndash; Parallel Changes</h2>
+					<p class="fragment">Plan large-scale changes, then execute across isolated worktrees.</p>
+					<ul class="idea">
+						<li class="fragment">Spins up 5-30 agents in parallel, each in its own worktree</li>
+						<li class="fragment">Research and plan phase first, then execute</li>
+						<li class="fragment">Creates a PR when done</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/batch migrate all API handlers from v1 to v2 schema</span>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Git Worktrees Explainer -->
+				<section>
+					<h2>Git Worktrees, Quick Primer</h2>
+					<p class="fragment">A worktree is a second working copy of your repo, on a different branch, sharing the same <code>.git</code> history.</p>
+					<ul class="idea">
+						<li class="fragment">Unlike branches: no stashing, no switching. Both exist on disk simultaneously</li>
+						<li class="fragment">Unlike clones: no extra fetch, shared objects, lightweight</li>
+						<li class="fragment">Claude uses these to isolate agent work from your code</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">git worktree add ../my-feature feature-branch</span>
+							</div>
+							<div class="terminal-block">
+								<pre class="cmd-output"># two directories, same repo, different branches
+# claude -w does this for you automatically</pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- --worktree -->
+				<section>
+					<h2>--worktree &ndash; Branch Isolation</h2>
+					<p class="fragment">Start Claude in an isolated git worktree.</p>
+					<ul class="idea">
+						<li class="fragment">Changes happen on a separate branch, your working tree stays clean</li>
+						<li class="fragment">Ideal for exploratory work or multi-agent setups</li>
+						<li class="fragment">Worktree is cleaned up automatically if no changes are made</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude -w "try out the new caching approach"</span>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- Complementary Tools -->
+				<section>
+					<h2>Complementary Tools</h2>
+					<p class="fragment" style="font-size: 0.85em;">Claude Code handles the AI work. These handle everything around it.</p>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<pre class="cmd-output"><span class="cmd-prompt">#</span> Navigate &amp; merge worktrees without raw git commands
+<span class="cmd-prompt">$</span> <span class="cmd-command">cargo install worktrunk</span>          <span style="color:#8b949e;"># github.com/max-sixty/worktrunk</span>
+
+<span class="cmd-prompt">#</span> Auto-activate correct tool versions per worktree
+<span class="cmd-prompt">$</span> <span class="cmd-command">curl https://mise.run | sh</span>       <span style="color:#8b949e;"># github.com/jdx/mise</span>
+
+<span class="cmd-prompt">#</span> Track token usage and costs across sessions
+<span class="cmd-prompt">$</span> <span class="cmd-command">bunx ccusage</span>                     <span style="color:#8b949e;"># github.com/ryoppippi/ccusage</span>
+
+<span class="cmd-prompt">#</span> Native macOS terminal for managing AI agent sessions
+<span class="cmd-prompt">$</span> <span class="cmd-command">brew tap manaflow-ai/cmux &amp;&amp; brew install --cask cmux</span>
+                                     <span style="color:#8b949e;"># github.com/manaflow-ai/cmux</span>
+
+<span class="cmd-prompt">#</span> Watch agent teams work across panes (or use cmux above)
+<span class="cmd-prompt">$</span> <span class="cmd-command">tmux</span>                             <span style="color:#8b949e;"># built-in to most systems</span></pre>
+							</div>
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<!-- ==================== SESSION MANAGEMENT ==================== -->
+			<section>
+				<section class="center-vertical">
+					<h2>Session Management</h2>
+					<span class="highlight-yellow">pick up where you left off</span>
+				</section>
+
+				<!-- Memory Overview -->
+				<section>
+					<h2>Memory in Claude Code</h2>
+					<p class="fragment">Claude has several layers of memory. Each serves a different purpose.</p>
+					<ul class="idea" style="font-size: 0.9em;">
+						<li class="fragment"><strong>CLAUDE.md</strong> &ndash; you write it. Instructions, conventions, project context. Loaded every session</li>
+						<li class="fragment"><strong>Auto-memory</strong> &ndash; Claude writes it. Patterns, preferences, learnings. Stored in <code>~/.claude/projects/&lt;project&gt;/memory/</code></li>
+						<li class="fragment"><strong>Session history</strong> &ndash; ephemeral. Gone when the session ends (use <code>/compact</code> to reclaim space)</li>
+					</ul>
+					<p class="fragment" style="font-size: 0.85em;">Built-in auto-memory is local-only and capped at 200 lines in the index. For heavier needs, <strong>Serena</strong> adds symbol-level code memory and <strong>Claude-Mem</strong> adds persistent cross-session recall with compression.</p>
+				</section>
+
+				<!-- /memory -->
+				<section>
+					<h2>/memory &ndash; Persistent Memory</h2>
+					<p class="fragment">Claude remembers things across sessions automatically.</p>
+					<ul class="idea">
+						<li class="fragment">Records your preferences, project context, feedback</li>
+						<li class="fragment">Recalled in future sessions without you asking</li>
+						<li class="fragment">View and edit with <code>/memory</code></li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/memory</span>
+							</div>
+							<div class="terminal-block">
+								<pre class="cmd-output">3 memories stored:
+  user_role.md - senior Go engineer
+  feedback_testing.md - always use table-driven tests
+  project_auth.md - auth rewrite for compliance</pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- /fork -->
+				<section>
+					<h2>/fork &ndash; Branch Conversations</h2>
+					<p class="fragment">Copy your conversation to try a different approach.</p>
+					<ul class="idea">
+						<li class="fragment">Original conversation stays untouched</li>
+						<li class="fragment">Explore alternatives without losing your progress</li>
+						<li class="fragment">Both branches are independently resumable</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/fork</span>
+							</div>
+							<div class="terminal-block">
+								<pre class="cmd-output">Forked session. Original preserved as "auth-refactor".</pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- /rewind -->
+				<section>
+					<h2>/rewind &ndash; Undo Everything</h2>
+					<p class="fragment">Roll back conversation and code changes together.</p>
+					<ul class="idea">
+						<li class="fragment">Reverts both the conversation state and file changes</li>
+						<li class="fragment">Pick how far back to go</li>
+						<li class="fragment">Use when Claude goes off track</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/rewind</span>
+							</div>
+							<div class="terminal-block">
+								<pre class="cmd-output">Select a checkpoint to rewind to:
+  [1] Before "refactor auth middleware"
+  [2] Before "add error handling"</pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- /rename + --name -->
+				<section>
+					<h2>/rename &ndash; Named Sessions</h2>
+					<p class="fragment">Give your sessions meaningful names for easy lookup.</p>
+					<ul class="idea">
+						<li class="fragment">Auto-generate a name from context, or set one yourself</li>
+						<li class="fragment">Start with a name: <code>claude -n "auth-refactor"</code></li>
+						<li class="fragment">Resume later: <code>claude --resume auth-refactor</code></li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">/rename</span>
+							</div>
+							<div class="terminal-block">
+								<pre class="cmd-output">Session renamed to "api-v2-migration"</pre>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- --bare -->
+				<section>
+					<h2>--bare &ndash; Scripted Mode</h2>
+					<p class="fragment">Minimal Claude for CI/CD pipelines and scripts.</p>
+					<ul class="idea">
+						<li class="fragment">Skips hooks, LSP, plugins, auto-memory</li>
+						<li class="fragment">Combine with <code>-p</code> for non-interactive use</li>
+						<li class="fragment">Fast startup, predictable output</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude --bare -p "generate changelog from last 10 commits"</span>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<!-- --from-pr -->
+				<section>
+					<h2>--from-pr &ndash; PR Context</h2>
+					<p class="fragment">Start a session with full context from a GitHub PR.</p>
+					<ul class="idea">
+						<li class="fragment">Loads the diff, description, and comments automatically</li>
+						<li class="fragment">Great for reviewing or continuing work on a PR</li>
+						<li class="fragment">Pairs well with <code>--resume</code> for ongoing PR work</li>
+					</ul>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">$</span> <span class="cmd-command">claude --from-pr 142</span>
+							</div>
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<!-- ==================== AGENT TEAMS ==================== -->
+			<section>
+				<section class="center-vertical">
+					<h2>Agent Teams</h2>
+					<span class="highlight-pink">multi-agent collaboration</span>
+				</section>
+
+				<section>
+					<h2>How It Works</h2>
+					<div class="arch-diagram">
+						<div class="arch-box lead">Team Lead<br/><small>Orchestrates work, assigns tasks</small></div>
+						<div class="arch-arrow">&darr; shared task list + mailbox &darr;</div>
+						<div class="arch-row">
+							<div class="arch-box teammate">Backend<br/><small>API endpoints</small></div>
+							<div class="arch-box teammate">Frontend<br/><small>UI components</small></div>
+							<div class="arch-box teammate">Tests<br/><small>Coverage</small></div>
+						</div>
+					</div>
+					<div class="terminal-window fragment">
+						<div class="terminal-header">
+							<span class="terminal-button close"></span>
+							<span class="terminal-button minimize"></span>
+							<span class="terminal-button maximize"></span>
+							<span class="terminal-title">Terminal - claude</span>
+						</div>
+						<div class="terminal-content">
+							<div class="terminal-block">
+								<span class="cmd-prompt">&gt;</span> <span class="cmd-command">Spawn 3 teammates: one for Go API handlers,
+  one for the Svelte frontend, one for integration tests.
+  Use the issue #42 spec in docs/.</span>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2>When to Use (and Not)</h2>
+					<ul class="idea" style="font-size: 0.9em;">
+						<li class="fragment" style="color: #22c55e;">Parallel feature work on independent modules</li>
+						<li class="fragment" style="color: #22c55e;">Competing hypotheses: debug by debate</li>
+						<li class="fragment" style="color: #22c55e;">Cross-layer coordination: frontend + backend + tests</li>
+					</ul>
+					<ul class="idea" style="margin-top: 10px; font-size: 0.9em;">
+						<li class="fragment" style="color: #ef4444;">Same-file edits: agents will conflict</li>
+						<li class="fragment" style="color: #ef4444;">Sequential dependencies: too much overhead</li>
+						<li class="fragment" style="color: #ef4444;">Simple tasks: single session is faster and cheaper</li>
+					</ul>
+				</section>
+			</section>
+
+			<!-- ==================== DEMO ==================== -->
+			<section data-background-color="#161b22" class="center-vertical">
+				<h2>Demo Time</h2>
+				<p class="highlight-pink">Let's see it in action</p>
+				<aside class="notes">
+					Demo options:
+					1. Show /effort switching between levels
+					2. Spawn an agent team on a real repo
+					3. Voice mode quick demo
+					4. Show /loop setup
+					5. Custom agent invocation
+				</aside>
+			</section>
+
+			<!-- ==================== RESOURCES ==================== -->
+			<section>
+				<section>
+					<h2>Resources</h2>
+					<ul class="idea" style="font-size: 0.85em;">
+						<li><strong>Docs:</strong> <a href="https://code.claude.com/docs">code.claude.com/docs</a></li>
+						<li><strong>Agent Teams:</strong> <a href="https://code.claude.com/docs/en/agent-teams">code.claude.com/docs/en/agent-teams</a></li>
+						<li><strong>Changelog:</strong> <a href="https://code.claude.com/docs/en/changelog">code.claude.com/docs/en/changelog</a></li>
+						<li><strong>Anthropic Academy:</strong> 13 free courses incl. "Claude Code in Action"</li>
+						<li><strong>Usage tracking:</strong> <a href="https://github.com/ryoppippi/ccusage">ryoppippi/ccusage</a></li>
+						<li><strong>This deck:</strong> <a href="https://github.com/thushan/talk-claude-code">thushan/talk-claude-code</a></li>
+					</ul>
+				</section>
+			</section>
+
+			<!-- ==================== Q&A ==================== -->
+			<section class="center-vertical">
+				<h2>Q &amp; A</h2>
+				<p>Thanks for listening!</p>
+				<p class="author-header-github" style="justify-content: center; margin-top: 30px;">
+					<svg class="github-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+					</svg>
+					<a href="https://github.com/thushan/talk-claude-code">thushan/talk-claude-code</a>
+				</p>
+			</section>
+
+		</div>
+	</div>
+
+	<script src="engine/reveal.js"></script>
+	<script src="engine/plugin/notes/notes.js"></script>
+	<script src="engine/plugin/markdown/markdown.js"></script>
+	<script src="engine/plugin/highlight/highlight.js"></script>
+	<script>
+		Reveal.initialize({
+			hash: true,
+			slideNumber: true,
+			transition: 'slide',
+			center: true,
+			width: 1280,
+			height: 720,
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+</html>
